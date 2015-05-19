@@ -1,0 +1,25 @@
+{
+  "BOP": "BOP",
+  "REPORTS":"Reports",
+  "HELP":"Help",
+  "SEARCH": "Search",
+  "ADD": "Add",
+
+  "CARDSFORWEEK": "Cards for week: ",
+  "CARDSTOTAL": "Cards total: ",
+
+  "FILLDATE": "Date of filling",
+  "OBSDATE": "Date of observation",
+  "OBSDATEANDTIME": "Date and time of observation",
+  "OBSDEPARTMENT": "Department of observation",
+  "OBSERVATIONS": "Observation",
+  "OBSCOMMENT": "Comment",
+
+  "MODALADDHEAD":"New BOP card",
+  "DATEIS":"Selected date is: ",
+  "TIMEIS": "Time is: ",
+  "DONE":"Done",
+  "CANCEL":"Cancel",
+
+  "WASDEVELOPEDBY": "App was developed by Anatoly Yashkin"
+}

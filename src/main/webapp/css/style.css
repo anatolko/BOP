@@ -1,0 +1,31 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-top: 50px;
+}
+
+.navbar-inverse{
+    background-color: #00b3ee;
+}
+
+.box
+{
+    border: 1px black dashed;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.button-panel{
+    padding-right: 15px;
+}
+.container-fluid .text-muted {
+    margin: 15px 0;
+}
+
+.checkbox{
+    margin-left: 10px;
+}
+
+.checkBoxGroup{
+    margin:0px 50px 0px 50px;
+}

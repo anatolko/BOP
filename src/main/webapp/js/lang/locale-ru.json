@@ -1,0 +1,25 @@
+{
+  "BOP": "БОП",
+  "REPORTS":"Отчеты",
+  "HELP":"Помощь",
+  "SEARCH": "Поиск",
+  "ADD": "Добавить",
+
+  "CARDSFORWEEK": "Карт за неделю: ",
+  "CARDSTOTAL": "Карт всего: ",
+
+  "FILLDATE": "Дата заполнения",
+  "OBSDATE": "Дата наблюдения",
+  "OBSDATEANDTIME": "Дата и время наблюдения",
+  "OBSDEPARTMENT": "Отдел наблюдения",
+  "OBSERVATIONS": "Замечания",
+  "OBSCOMMENT": "Комментарий",
+
+  "MODALADDHEAD":"Новая БОП карта",
+  "DATEIS":"Выбраная дата: ",
+  "TIMEIS": "Время: ",
+  "DONE":"Готово",
+  "CANCEL":"Отмена",
+
+  "WASDEVELOPEDBY": "Приложение разработал Анатолий Яшкин"
+}
