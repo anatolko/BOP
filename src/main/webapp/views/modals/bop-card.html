@@ -1,0 +1,119 @@
+<!-- Add Card modal window -->
+    <div class="modal-header">
+        <h3 class="modal-title" translate>MODALADDHEAD</h3>
+    </div>
+    <form class="form-horizontal" ng-controller="ObsController as obs">
+        <div class="modal-body">
+            <div class="form-group">
+                <label  for="obsDate" class="col-sm-3 control-label" translate>OBSDATEANDTIME</label>
+                <div  class="col-sm-8" ng-controller="DatepickerCtrl">
+                    <pre id="obsDate" class="form-control" >{{'DATEIS' | translate}}<em>{{dt | date:'longDate' }}</em> {{'TIMEIS' | translate}}{{mytime | date:'H:mm' }}</pre>
+                    <datepicker style="float: left; width: 310px;" ng-model="dt" max-date="maxDay" min-date="minDay" show-weeks="true" starting-day="1" class="well well-sm"></datepicker>
+                    <div>
+                        <center><timepicker class="obsTime" id="obsTime" ng-model="mytime" hour-step="1" minute-step="1" show-meridian="false" readonly-input="false"></timepicker></center>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label  for="obsDep" class="col-sm-3 control-label" translate>OBSDEPARTMENT</label>
+                <div  class="col-sm-8">
+                    <select id="obsDep" class="form-control" >
+                        <option ng-repeat="obsDep in obs.obsInfo.obsDepartments" ng-attr-value="{{obsDep.id}}">{{obsDep.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <div  class="checkBoxGroup row">
+                <div class="modalLeftColumn col-sm-6" ng-repeat="obsCat in obs.obsInfo.obsCategories">
+
+                        <label   class="control-label">
+                            <input type="checkbox" ng-attr-value="{{obsCat.id}}">
+                            {{obsCat.name}}
+                        </label>
+
+                    <div class="checkbox" ng-repeat="item in obsCat.checkList">
+                        <label>
+                            <input type="checkbox" ng-attr-value="{{item.id}}">
+                            {{item.name}}
+                        </label>
+                    </div>
+
+                </div>
+                <div class="modalRightColumn col-sm-6">
+                    <label  for="obsDep" class="control-label" translate>Общие требования безопасности</label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Работает в часах, кольцах и т.п.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Не убаны длиные волосы
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            На производстве используются сотовые телефоны
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Передвигается не по пещеходной дорожке
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Курение в неположеном месте
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Заграмождены первичные средства пожаротушения и пожарные выходы
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Проход в ворота для транспорта
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Пища, вода и сигареты на рабочих местах
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Не применяются ремни безопасности
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Оборудование не выключено/не заблокировано
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="form-group">
+                <label  for="comment" class="col-sm-3 control-label" translate>OBSCOMMENT</label>
+                <div  class="col-sm-8">
+                    <textarea id="comment"class="form-control" rows="5"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()" translate>DONE</button>
+            <button class="btn btn-warning" ng-click="cancel()" translate>CANCEL</button>
+        </div>
+    </form>
+<!-- Add Card modal window end-->

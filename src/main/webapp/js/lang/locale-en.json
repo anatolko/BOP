@@ -1,6 +1,7 @@
 {
   "BOP": "BOP",
   "REPORTS":"Reports",
+  "REPORTS_DESCRIPTION": "please choose one of the reports",
   "HELP":"Help",
   "SEARCH": "Search",
   "ADD": "Add",

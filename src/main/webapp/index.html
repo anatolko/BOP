@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="bop">
+<html ng-app="bop-app">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" href="bower_components\bootstrap\dist\css\bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="bower_components\bootstrap-language\languages.min.css"/>
     <link rel="stylesheet" type="text/css" href="css\style.css"/>
+
+
 
 </head>
 <body ng-controller="BopController as bop">
@@ -26,62 +28,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" translate>BOP</a>
+            <a class="navbar-brand" href="#/home" translate>BOP</a>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" translate>REPORTS</a></li>
-                <li><a href="#" translate>HELP</a></li>
+                <li><a href="#/reports" translate>REPORTS</a></li>
+                <li><a href="#/help" translate>HELP</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="span3 well">
-    <center>
-        <h3>{{bop.user.name}}</h3>
-        <em>{{bop.user.department}}</em>, <em>{{bop.user.site}}</em>
-        <h5 class="text-success">{{'CARDSFORWEEK' | translate}}1 / 1</h5>
-        <h5 class="text-info">{{'CARDSTOTAL' | translate}}20</h5>
-    </center>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-xs-3">
-            <input name="search" class="form-control"
-                   type="text" ng-attr-placeholder="{{'SEARCH' | translate}}"
-                    >
-        </div>
-        <div class="button-panel pull-right">
-            <button class="btn btn-success" ng-click="newBopOpen('lg')" translate>ADD</button>
-        </div>
-    </div>
-
-    <div class="row box">
-        <table class="table  table-striped">
-            <thead>
-            <tr>
-                <th translate>FILLDATE</th>
-                <th translate>OBSDATE</th>
-                <th translate>OBSDEPARTMENT</th>
-                <th translate>OBSERVATIONS</th>
-                <th translate>OBSCOMMENT</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="bopCard in bop.bopCards">
-                <td>{{bopCard.fillDate}}</td>
-                <td>{{bopCard.obsDate}}</td>
-                <td>{{bopCard.obsDepartment}}</td>
-                <td>{{bopCard.obsRemarks}}</td>
-                <td>{{bopCard.comment}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+<div ng-view></div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom ">
     <div class="container-fluid ">
@@ -101,163 +60,8 @@
 
 </nav>
 
-<!-- Add Card modal window -->
-<script type="text/ng-template" id="myModalContent.html">
-    <div class="modal-header">
-        <h3 class="modal-title" translate>MODALADDHEAD</h3>
-    </div>
-    <form class="form-horizontal">
-        <div class="modal-body">
-            <div class="form-group">
-                <label  for="obsDate" class="col-sm-3 control-label" translate>OBSDATEANDTIME</label>
-                <div  class="col-sm-8" ng-controller="DatepickerCtrl">
-                    <pre id="obsDate" class="form-control" >{{'DATEIS' | translate}}<em>{{dt | date:'longDate' }}</em> {{'TIMEIS' | translate}}{{mytime | date:'H:mm' }}</pre>
-                    <datepicker style="float: left; width: 310px;" ng-model="dt" max-date="maxDay" min-date="minDay" show-weeks="true" starting-day="1" class="well well-sm"></datepicker>
-                    <div>
-                       <center><timepicker class="obsTime" id="obsTime" ng-model="mytime" hour-step="1" minute-step="1" show-meridian="false" readonly-input="false"></timepicker></center>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label  for="obsDep" class="col-sm-3 control-label" translate>OBSDEPARTMENT</label>
-                <div  class="col-sm-8">
-                    <select id="obsDep" class="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-                </div>
-            </div>
-            <hr>
-            <div  class="checkBoxGroup row">
-                <div class="modalLeftColumn col-sm-6">
-                    <label  for="obsDep" class="control-label" translate>Средства индивидуальной защиты</label>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            Голова
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                           Глаза и лицо
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            Органы дыхания
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            Уши
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            Руки
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            Туловище
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            Ноги и ступни
-                        </label>
-                    </div>
-                </div>
-                <div class="modalRightColumn col-sm-6">
-                    <label  for="obsDep" class="control-label" translate>Общие требования безопасности</label>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            Работает в часах, кольцах и т.п.
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            Не убаны длиные волосы
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            На производстве используются сотовые телефоны
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                           Передвигается не по пещеходной дорожке
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            Курение в неположеном месте
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            Заграмождены первичные средства пожаротушения и пожарные выходы
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            Проход в ворота для транспорта
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            Пища, вода и сигареты на рабочих местах
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            Не применяются ремни безопасности
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            Оборудование не выключено/не заблокировано
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="form-group">
-                <label  for="comment" class="col-sm-3 control-label" translate>OBSCOMMENT</label>
-                <div  class="col-sm-8">
-                    <textarea id="comment"class="form-control" rows="5"></textarea>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()" translate>DONE</button>
-            <button class="btn btn-warning" ng-click="cancel()" translate>CANCEL</button>
-        </div>
-    </form>
-</script>
-<!-- Add Card modal window end-->
-
 <script type="text/javascript" src="bower_components\angular\angular.min.js"></script>
+<script type="text/javascript" src="bower_components\angular-route\angular-route.js"></script>
 <script type="text/javascript" src="bower_components\angular-translate\angular-translate.min.js"></script>
 <script type="text/javascript" src="bower_components\angular-i18n\angular-locale_ru-ru.js"></script>
 <script type="text/javascript" src="bower_components\angular-i18n\angular-locale_en.js"></script>
@@ -269,6 +73,9 @@
 <script type="text/javascript"
         src="bower_components\angular-bootstrap\ui-bootstrap-tpls.min.js"></script>
 
+
 <script type="text/javascript" src="js\app.js"></script>
+
+
 </body>
 </html>
