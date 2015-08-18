@@ -1,38 +1,70 @@
 package bop.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.rest.core.annotation.RestResource;
+
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Created by Stretch on 19.05.2015.
  */
+@Entity
+@Table(name = "cards")
 public class Card implements Serializable {
+
     private static final long serialVersionUID = 5402151523535598251L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
-    private Date date;
-    private Date fillDate;
-    private String userName;
-    private String displayedName;
-    private String userGroup;
+
+    @NotNull
+    @Column(name = "card_date")
+    private Date cardDate;
+
+    @NotNull
+    @Column(name = "obs_date")
+    private Date obsDate;
+
+    @NotNull
+    @Column(name = "ad_account")
+    private String adAccount;
+
+    @NotNull
+    @Column(name = "user_department")
     private String userDepartment;
-    private int obsDepartmentId;
-    private int plantId;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name="obs_department_id")
+    private ObsDepartment obsDepartmentId;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name="plant_id")
+    @RestResource(rel = "card_plant_id")
+    private Plant plantId;
+
+    @NotNull
+    @Column(name = "selected_fields")
     private String selectedFields;
+
+    @Column(name = "comment")
     private String comment;
 
-    public Card(int id, Date date, Date fillDate, String userName, String displayedName, String userGroup, String userDepartment, int obsDepartmentId, int plantId, String selectedFields, String comment) {
-        this.id = id;
-        this.date = date;
-        this.fillDate = fillDate;
-        this.userName = userName;
-        this.displayedName = displayedName;
-        this.userGroup = userGroup;
-        this.userDepartment = userDepartment;
-        this.obsDepartmentId = obsDepartmentId;
-        this.plantId = plantId;
-        this.selectedFields = selectedFields;
-        this.comment = comment;
+    @ManyToOne
+    @JoinColumn(name="user_group_id")
+    private UserGroup userGroupId;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public int getId() {
@@ -43,44 +75,28 @@ public class Card implements Serializable {
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCardDate() {
+        return cardDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCardDate(Date cardDate) {
+        this.cardDate = cardDate;
     }
 
-    public Date getFillDate() {
-        return fillDate;
+    public Date getObsDate() {
+        return obsDate;
     }
 
-    public void setFillDate(Date fillDate) {
-        this.fillDate = fillDate;
+    public void setObsDate(Date obsDate) {
+        this.obsDate = obsDate;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getAdAccount() {
+        return adAccount;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getDisplayedName() {
-        return displayedName;
-    }
-
-    public void setDisplayedName(String displayedName) {
-        this.displayedName = displayedName;
-    }
-
-    public String getUserGroup() {
-        return userGroup;
-    }
-
-    public void setUserGroup(String userGroup) {
-        this.userGroup = userGroup;
+    public void setAdAccount(String adAccount) {
+        this.adAccount = adAccount;
     }
 
     public String getUserDepartment() {
@@ -91,19 +107,19 @@ public class Card implements Serializable {
         this.userDepartment = userDepartment;
     }
 
-    public int getObsDepartmentId() {
+    public ObsDepartment getObsDepartmentId() {
         return obsDepartmentId;
     }
 
-    public void setObsDepartmentId(int obsDepartmentId) {
+    public void setObsDepartmentId(ObsDepartment obsDepartmentId) {
         this.obsDepartmentId = obsDepartmentId;
     }
 
-    public int getPlantId() {
+    public Plant getPlantId() {
         return plantId;
     }
 
-    public void setPlantId(int plantId) {
+    public void setPlantId(Plant plantId) {
         this.plantId = plantId;
     }
 
@@ -121,5 +137,13 @@ public class Card implements Serializable {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public UserGroup getUserGroupId() {
+        return userGroupId;
+    }
+
+    public void setUserGroupId(UserGroup userGroupId) {
+        this.userGroupId = userGroupId;
     }
 }

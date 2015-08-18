@@ -77,6 +77,7 @@ hs_err_pid*
 
 ### Bower ###
 bower_components
+libs
 .bower-cache
 .bower-registry
 .bower-tmp

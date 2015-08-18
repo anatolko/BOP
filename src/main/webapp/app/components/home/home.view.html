@@ -1,0 +1,49 @@
+
+
+<div ng-controller="HomeInfo as home">
+    <div class="span3 well">
+        <center>
+            <h3>{{home.user.name}}</h3>
+            <em>{{home.user.department}}</em>, <em>{{home.user.site}}</em>
+            <h5 class="text-success">{{'CARDSFORWEEK' | translate}}1 / 1</h5>
+            <h5 class="text-info">{{'CARDSTOTAL' | translate}}20</h5>
+        </center>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3">
+                <input name="search" class="form-control"
+                       type="text" ng-attr-placeholder="{{'SEARCH' | translate}}">
+            </div>
+            <div class="button-panel pull-right">
+                <button class="btn btn-success" ng-click="home.newCard('lg')" translate>ADD</button>
+            </div>
+        </div>
+
+        <div class="row box">
+            <table class="table  table-striped">
+                <thead>
+                <tr>
+                    <th translate>FILLDATE</th>
+                    <th translate>OBSDATE</th>
+                    <th translate>OBSDEPARTMENT</th>
+                    <th translate>OBSERVATIONS</th>
+                    <th translate>OBSCOMMENT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="card in home.cards">
+                    <td>{{card.fillDate}}</td>
+                    <td>{{card.obsDate}}</td>
+                    <td>{{card.obsDepartment}}</td>
+                    <td>{{card.obsRemarks}}</td>
+                    <td>{{card.comment}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
