@@ -1,21 +1,25 @@
 package bop.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import bop.usertypes.JsonMapType;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * Created by Stretch on 19.05.2015.
  */
 @Entity
 @Table(name = "cards")
+@TypeDefs({ @TypeDef(name = "UserJsonObject", typeClass = JsonMapType.class) })
 public class Card implements Serializable {
 
     private static final long serialVersionUID = 5402151523535598251L;
@@ -44,24 +48,32 @@ public class Card implements Serializable {
     @NotNull
     @ManyToOne
     @JoinColumn(name="obs_department_id")
-    private ObsDepartment obsDepartmentId;
+    @RestResource(rel = "card_obs_department")
+    private ObsDepartment obsDepartment;
 
     @NotNull
     @ManyToOne
     @JoinColumn(name="plant_id")
-    @RestResource(rel = "card_plant_id")
-    private Plant plantId;
+    @RestResource(rel = "card_plant")
+    private Plant plant;
 
     @NotNull
+    @Column(name = "selected_categories")
+    @Type(type = "UserJsonObject")
+    private Map<String,ArrayList<Integer>> selectedCategories = new HashMap<>();
+
+
     @Column(name = "selected_fields")
-    private String selectedFields;
+    @Type(type = "UserJsonObject")
+    private Map<String,ArrayList<Integer>> selectedFields = new HashMap<>();
 
     @Column(name = "comment")
     private String comment;
 
     @ManyToOne
     @JoinColumn(name="user_group_id")
-    private UserGroup userGroupId;
+    @RestResource(rel = "card_user_group")
+    private UserGroup userGroup;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -107,28 +119,57 @@ public class Card implements Serializable {
         this.userDepartment = userDepartment;
     }
 
-    public ObsDepartment getObsDepartmentId() {
-        return obsDepartmentId;
+    public ObsDepartment getObsDepartment() {
+        return obsDepartment;
     }
 
-    public void setObsDepartmentId(ObsDepartment obsDepartmentId) {
-        this.obsDepartmentId = obsDepartmentId;
+    public void setObsDepartment(ObsDepartment obsDepartment) {
+        this.obsDepartment = obsDepartment;
     }
 
-    public Plant getPlantId() {
-        return plantId;
+    public Plant getPlant() {
+        return plant;
     }
 
-    public void setPlantId(Plant plantId) {
-        this.plantId = plantId;
+    public void setPlant(Plant plant) {
+        this.plant = plant;
     }
 
-    public String getSelectedFields() {
+    public Map<String, ArrayList<Integer>> getSelectedCategories() {
+        return selectedCategories;
+    }
+
+    public void setSelectedCategories(String selectedCategories) {
+        Map<String, ArrayList<Integer>> tmpMap = new HashMap<>();
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            tmpMap =  mapper.readValue(selectedCategories, new TypeReference<HashMap<String,ArrayList<Integer>>>(){});
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        this.selectedCategories = tmpMap;
+    }
+
+    public Map<String, ArrayList<Integer>> getSelectedFields() {
         return selectedFields;
     }
 
     public void setSelectedFields(String selectedFields) {
-        this.selectedFields = selectedFields;
+        Map<String, ArrayList<Integer>> tmpMap = new HashMap<>();
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            tmpMap =  mapper.readValue(selectedFields, new TypeReference<HashMap<String,ArrayList<Integer>>>(){});
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+        this.selectedFields = tmpMap;
     }
 
     public String getComment() {
@@ -139,11 +180,11 @@ public class Card implements Serializable {
         this.comment = comment;
     }
 
-    public UserGroup getUserGroupId() {
-        return userGroupId;
+    public UserGroup getUserGroup() {
+        return userGroup;
     }
 
-    public void setUserGroupId(UserGroup userGroupId) {
-        this.userGroupId = userGroupId;
+    public void setUserGroup(UserGroup userGroup) {
+        this.userGroup = userGroup;
     }
 }

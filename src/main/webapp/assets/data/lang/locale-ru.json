@@ -13,7 +13,8 @@
   "OBSDATE": "Дата наблюдения",
   "OBSDATEANDTIME": "Дата и время наблюдения",
   "OBSDEPARTMENT": "Отдел наблюдения",
-  "OBSERVATIONS": "Замечания",
+  "OBSCATEGORIES": "Наблюдения",
+  "OBSFIELDS": "Замечания",
   "OBSCOMMENT": "Комментарий",
 
   "MODALADDHEAD":"Новая БОП карта",

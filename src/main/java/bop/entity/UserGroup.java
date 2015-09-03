@@ -28,8 +28,8 @@ public class UserGroup implements Serializable {
     @NotNull
     @ManyToOne
     @JoinColumn(name="plant_id")
-    @RestResource(rel = "group_plant_id")
-    private Plant plantId;
+    @RestResource(rel = "group_plant")
+    private Plant plant;
 
     public int getId() {
         return id;
@@ -55,11 +55,11 @@ public class UserGroup implements Serializable {
         this.cardsCount = cardsCount;
     }
 
-    public Plant getPlantId() {
-        return plantId;
+    public Plant getPlant() {
+        return plant;
     }
 
-    public void setPlantId(Plant plantId) {
-        this.plantId = plantId;
+    public void setPlant(Plant plant) {
+        this.plant = plant;
     }
 }

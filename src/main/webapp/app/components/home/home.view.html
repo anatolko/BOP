@@ -20,7 +20,9 @@
                 <button class="btn btn-success" ng-click="home.newCard('lg')" translate>ADD</button>
             </div>
         </div>
-
+        <!--{{home.cards}}-->
+        <!--{{home.page}}-->
+        <!--{{currentPage}}-->
         <div class="row box">
             <table class="table  table-striped">
                 <thead>
@@ -28,16 +30,39 @@
                     <th translate>FILLDATE</th>
                     <th translate>OBSDATE</th>
                     <th translate>OBSDEPARTMENT</th>
-                    <th translate>OBSERVATIONS</th>
+                    <th translate>OBSCATEGORIES</th>
+                    <th translate>OBSFIELDS</th>
                     <th translate>OBSCOMMENT</th>
                 </tr>
                 </thead>
+                <tfoot>
+                <tr>
+                    <td colspan="6" style="text-align: center;">
+                        <pagination boundary-links="true"
+                                    total-items="home.page.totalElements"
+                                    num-pages="home.page.totalPages"
+                                    items-per-page = "home.page.size"
+                                    ng-model="currentPage"
+                                    class="pagination-sm"
+                                    previous-text="&lsaquo;"
+                                    next-text="&rsaquo;"
+                                    first-text="&laquo;"
+                                    last-text="&raquo;"></pagination>
+
+                    </td>
+                </tr>
+                </tfoot>
                 <tbody>
-                <tr ng-repeat="card in home.cards">
-                    <td>{{card.fillDate}}</td>
-                    <td>{{card.obsDate}}</td>
-                    <td>{{card.obsDepartment}}</td>
-                    <td>{{card.obsRemarks}}</td>
+                <tr ng-repeat="card in cards">
+                    <td>{{card.cardDate | date: "short"}}</td>
+                    <td>{{card.obsDate | date: "short"}}</td>
+                    <td>{{card.card_obs_department.name[index.lang]}}</td>
+                    <td  ng-init='obsCats=home.getObsCats(card.selectedCategories.categories)'>
+                       <p ng-repeat = 'obsCat in obsCats'>{{obsCat.name[index.lang]}}</p>
+                    </td>
+                    <td  ng-init='obsFields=home.getObsFields(card.selectedFields.fields)'>
+                        <p ng-repeat = 'obsField in obsFields'>{{obsField.name[index.lang]}}</p>
+                    </td>
                     <td>{{card.comment}}</td>
                 </tr>
                 </tbody>

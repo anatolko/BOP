@@ -13,7 +13,8 @@
   "OBSDATE": "Date of observation",
   "OBSDATEANDTIME": "Date and time of observation",
   "OBSDEPARTMENT": "Department of observation",
-  "OBSERVATIONS": "Observation",
+  "OBSCATEGORIES": "Observations",
+  "OBSFIELDS": "Remarks",
   "OBSCOMMENT": "Comment",
 
   "MODALADDHEAD":"New BOP card",

@@ -3,13 +3,11 @@
 
     angular
         .module('app.bop')
-        .factory('Card', obsDepartment);
+        .factory('obsDepartment', obsDepartment);
 
     obsDepartment.$inject = ['$resource'];
 
     function obsDepartment($resource){
-        return $resource('obs-departments/:id', {}, {
-            query: {method:'GET', params:{id:'@id'}}
-        });
+        return $resource('api/obs-departments/:id', {id:'@id'});
     }
 })();

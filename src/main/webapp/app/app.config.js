@@ -1,3 +1,4 @@
+//In this file we will config libs
 (function () {
     'use strict';
 
@@ -6,9 +7,9 @@
         .config(configure);
 
     configure.$inject =
-        ['$translateProvider'];
+        ['$translateProvider', 'tmhDynamicLocaleProvider'];
 
-    function configure($translateProvider) {
+    function configure($translateProvider, tmhDynamicLocaleProvider) {
         $translateProvider.useStaticFilesLoader({
             prefix: './assets/data/lang/locale-',
             suffix: '.json'
@@ -17,6 +18,9 @@
         $translateProvider.fallbackLanguage('en');
         $translateProvider.useCookieStorage();
         $translateProvider.useSanitizeValueStrategy('escape');
+
+        tmhDynamicLocaleProvider.useCookieStorage();
+        tmhDynamicLocaleProvider.localeLocationPattern('assets/libs/angular-i18n/angular-locale_{{locale}}.js')
 
 
     }

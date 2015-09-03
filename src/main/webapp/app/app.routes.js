@@ -1,3 +1,4 @@
+//In this file we will confing routes for out application
 (function () {
     'use strict';
 

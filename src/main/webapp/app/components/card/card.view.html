@@ -2,60 +2,59 @@
 <div class="modal-header">
     <h3 class="modal-title" translate>MODALADDHEAD</h3>
 </div>
-<form class="form-horizontal" ng-controller="CardForm as card">
+<form class="form-horizontal" name='cardForm' ng-submit='cardForm.$valid && card.ok()'>
     <div class="modal-body container-fluid">
         <div class="form-group row">
             <label  for="obsDate" class="col-sm-3 control-label" translate>OBSDATEANDTIME</label>
             <div  class="col-sm-8" ng-controller="DatepickerCtrl">
-                <pre id="obsDate" class="form-control" >{{'DATEIS' | translate}}<em>{{dt | date:'longDate' }}</em> {{'TIMEIS' | translate}}{{mytime | date:'H:mm' }}</pre>
-                <datepicker style="float: left; width: 310px;" ng-model="dt" max-date="maxDay" min-date="minDay" show-weeks="true" starting-day="1" class="well well-sm"></datepicker>
+                <pre id="obsDate" class="form-control" >{{'DATEIS' | translate}}<em>{{card.obsDate | date:'longDate' }}</em> {{'TIMEIS' | translate}}{{card.obsTime | date:'H:mm' }}</pre>
+                <datepicker style="float: left; width: 310px;" ng-model="card.obsDate" max-date="maxDay" min-date="minDay" show-weeks="true" starting-day="1" class="well well-sm"></datepicker>
                 <div>
-                    <center><timepicker class="obsTime" id="obsTime" ng-model="mytime" hour-step="1" minute-step="1" show-meridian="false" readonly-input="false"></timepicker></center>
+                    <center><timepicker class="obsTime" id="obsTime" ng-model="card.obsTime" hour-step="1" minute-step="1" show-meridian="false" readonly-input="false"></timepicker></center>
                 </div>
             </div>
         </div>
         <div class="form-group row" >
             <label  for="obsDep" class="col-sm-3 control-label" translate>OBSDEPARTMENT</label>
             <div  class="col-sm-8">
-                <select id="obsDep" class="form-control" >
-                    <option ng-repeat="obsDep in card.obsDepartments._embedded.obsDepartments" ng-attr-value="{{obsDep.id}}">{{obsDep.name[card.lang]}}</option>
+                <select   id="obsDep" class="form-control" name="obsDep" ng-model="card.selectedDep" ng-required="true">
+                    <option ng-init="card.selectedDep=card.obsDepartments._embedded.obsDepartments[0].id"  ng-repeat="obsDep in card.obsDepartments._embedded.obsDepartments" value="{{obsDep.id}}">{{obsDep.name[card.lang]}}</option>
                 </select>
             </div>
         </div>
         <hr>
-        <div  class="checkbox-group row">
-            <div class="col-md-6" ng-repeat="obsCat in card.obsInfo.obsCategories">
 
-                <label   class="control-label">
-                    <input type="checkbox" ng-attr-value="{{obsCat.id}}" ng-model="obsCat.disabled">
-                    {{obsCat.name}}
+        <div  class="checkbox-group row">
+
+            <div ng-class="{'has-error': cardForm.$invalid}" class="col-md-6" ng-repeat="obsCat in card.obsInfo">
+
+                <label  class="control-label">
+                    <input type="checkbox" checklist-value="obsCat.id" value="{{obsCat.id}}" checklist-model="card.checkedCats" ng-model="obsCat.disabled">
+                    {{obsCat.name[card.lang]}}
                 </label>
 
-                <div class="checkbox" ng-repeat="item in obsCat.checkList">
+                <div class="checkbox" ng-repeat="item in obsCat.obsFields._embeddedItems">
                     <label >
-                        <input ng-disabled="!obsCat.disabled" ng-checked="obsCat.disabled && 0" type="checkbox" ng-attr-value="{{item.id}}">
-                        {{item.name}}
+                        <input ng-disabled="!obsCat.disabled" ng-checked="obsCat.disabled && 0" type="checkbox" checklist-model="card.checkedFields"  checklist-value="item.id" value="{{item.id}}">
+                        {{item.name[card.lang]}}
                     </label>
                 </div>
 
             </div>
         </div>
         <hr>
-        <div class="form-group">
+        <div  class="form-group">
             <label  for="comment" class="col-sm-3 control-label" translate>OBSCOMMENT</label>
             <div  class="col-sm-8">
-                <textarea id="comment"class="form-control" rows="5"></textarea>
+                <textarea id="comment"class="form-control" rows="5" ng-model="card.comment"></textarea>
             </div>
         </div>
+
     </div>
+
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="ok()" translate>DONE</button>
-        <button class="btn btn-warning" ng-click="cancel()" translate>CANCEL</button>
+        <input type='submit' class="btn btn-primary" ng-disabled="card.checkedCats.length < 1"  value="{{'DONE' | translate }}">
+        <button class="btn btn-warning" ng-click="card.cancel()"  translate>CANCEL</button>
     </div>
 </form>
 <!-- Add Card modal window end-->
-
-<script type="text/javascript" src="controllers/card.controller.js"></script>
-<script type="text/javascript" src="controllers/date-picker.controller.js"></script>
-<script type="text/javascript" src="services/obs-department.service.js"></script>
-<script type="text/javascript" src="services/card.service.js"></script>
