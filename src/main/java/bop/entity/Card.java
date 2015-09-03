@@ -75,9 +75,6 @@ public class Card implements Serializable {
     @RestResource(rel = "card_user_group")
     private UserGroup userGroup;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     public int getId() {
         return id;
