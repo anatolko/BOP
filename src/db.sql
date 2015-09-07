@@ -11,7 +11,7 @@ Target Server Type    : PGSQL
 Target Server Version : 90404
 File Encoding         : 65001
 
-Date: 2015-09-03 16:18:21
+Date: 2015-09-07 10:37:09
 */
 
 
@@ -35,9 +35,9 @@ CREATE SEQUENCE "hibernate_sequence"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 70
+ START 75
  CACHE 1;
-SELECT setval('"public"."hibernate_sequence"', 70, true);
+SELECT setval('"public"."hibernate_sequence"', 75, true);
 
 -- ----------------------------
 -- Sequence structure for obs_cat_id
@@ -157,6 +157,11 @@ INSERT INTO "cards" VALUES ('67', '2015-09-03 14:45:49.001', '2015-09-03 14:45:4
 INSERT INTO "cards" VALUES ('68', '2015-09-03 14:46:10.445', '2015-09-03 14:46:07', 'ayashkin', 'HR', '1', '4', '{"fields":[15]}', null, '1', '{"categories":[2]}');
 INSERT INTO "cards" VALUES ('69', '2015-09-03 14:48:04.41', '2015-09-03 14:48:00', 'ayashkin', 'HR', '1', '4', '{"fields":[2,7]}', null, '1', '{"categories":[1]}');
 INSERT INTO "cards" VALUES ('70', '2015-09-03 14:58:47.326', '2015-09-03 14:58:41', 'ayashkin', 'HR', '1', '4', '{"fields":[]}', null, '1', '{"categories":[]}');
+INSERT INTO "cards" VALUES ('71', '2015-09-03 20:15:04.643', '2015-09-01 14:14:26', 'ayashkin', 'HR', '4', '4', '{"fields":[35]}', 'ужас!', '1', '{"categories":[5]}');
+INSERT INTO "cards" VALUES ('72', '2015-09-03 20:49:07.709', '2015-09-03 20:49:03', 'ayashkin', 'HR', '1', '4', '{"fields":[19,15]}', null, '1', '{"categories":[2]}');
+INSERT INTO "cards" VALUES ('73', '2015-09-03 20:50:03.692', '2015-09-03 20:50:01', 'ayashkin', 'HR', '1', '4', '{"fields":[]}', null, '1', '{"categories":[]}');
+INSERT INTO "cards" VALUES ('74', '2015-09-03 21:53:14.439', '2015-09-03 21:53:08', 'ayashkin', 'HR', '1', '4', '{"fields":[]}', null, '1', '{"categories":[]}');
+INSERT INTO "cards" VALUES ('75', '2015-09-07 10:35:11.653', '2015-09-07 10:34:56', 'ayashkin', 'HR', '1', '4', '{"fields":[38]}', null, '1', '{"categories":[5]}');
 COMMIT;
 
 -- ----------------------------

@@ -4,6 +4,7 @@
   "description": "BOP web application",
   "main": "index.html",
   "dependencies": {
+    "bower": "1.5.2",
     "main-bower-files": "^2.9.0"
   },
   "devDependencies": {},

@@ -4,6 +4,7 @@
 //import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 //import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
 //import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.builders.WebSecurity;
 //import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 //import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 //
@@ -18,6 +19,13 @@
 //                .anyRequest().fullyAuthenticated()
 //                .and()
 //                .formLogin();
+//    }
+//
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring()
+//                .antMatchers("/app/**/*.{js,html}")
+//                .antMatchers("/assets/**");
 //    }
 //
 //    @Configuration

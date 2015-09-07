@@ -21,6 +21,12 @@
                     templateUrl: 'app/components/reports/reports.view.html',
                     controller: 'HomeInfo'
                 })
+
+                .state('login', {
+                    url: '/login',
+                    templateUrl: 'app/components/login/login.view.html',
+                    controller: 'Login'
+                })
         }
 }
 )();
