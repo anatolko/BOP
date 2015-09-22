@@ -53,10 +53,10 @@
                 </tr>
                 </tfoot>
                 <tbody>
-                <tr  ng-repeat="card in cards">
+                <tr ng-repeat="card in cards">
                     <td>{{card.cardDate | date: "short"}}</td>
                     <td>{{card.obsDate | date: "short"}}</td>
-                    <td>{{card.card_obs_department.name[index.lang]}}</td>
+                    <td>{{card.obsDepartment.name[index.lang]}}</td>
                     <td  ng-init='obsCats=home.getObsCats(card.selectedCategories.categories)'>
                        <p ng-repeat = 'obsCat in obsCats'>{{obsCat.name[index.lang]}}</p>
                     </td>

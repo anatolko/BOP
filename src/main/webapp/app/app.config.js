@@ -7,9 +7,9 @@
         .config(configure);
 
     configure.$inject =
-        ['$translateProvider', 'tmhDynamicLocaleProvider'];
+        ['$translateProvider', 'tmhDynamicLocaleProvider','$httpProvider'];
 
-    function configure($translateProvider, tmhDynamicLocaleProvider) {
+    function configure($translateProvider, tmhDynamicLocaleProvider, $httpProvider) {
         $translateProvider.useStaticFilesLoader({
             prefix: './assets/data/lang/locale-',
             suffix: '.json'
@@ -21,6 +21,8 @@
 
         tmhDynamicLocaleProvider.useCookieStorage();
         tmhDynamicLocaleProvider.localeLocationPattern('assets/libs/angular-i18n/angular-locale_{{locale}}.js')
+
+        $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
 
     }

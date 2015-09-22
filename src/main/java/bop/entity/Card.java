@@ -7,16 +7,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-/**
- * Created by Stretch on 19.05.2015.
- */
+
 @Entity
 @Table(name = "cards")
 @TypeDefs({ @TypeDef(name = "UserJsonObject", typeClass = JsonMapType.class) })
@@ -48,13 +46,11 @@ public class Card implements Serializable {
     @NotNull
     @ManyToOne
     @JoinColumn(name="obs_department_id")
-    @RestResource(rel = "card_obs_department")
     private ObsDepartment obsDepartment;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name="plant_id")
-    @RestResource(rel = "card_plant")
+    @JoinColumn(name="plant_id",referencedColumnName = "id")
     private Plant plant;
 
     @NotNull
@@ -67,12 +63,12 @@ public class Card implements Serializable {
     @Type(type = "UserJsonObject")
     private Map<String,ArrayList<Integer>> selectedFields = new HashMap<>();
 
+    @Size(max=512,message = "\"${validatedValue}\" is ${validatedValue.length() > 512 ? 'way' : ''} too long." )
     @Column(name = "comment")
     private String comment;
 
     @ManyToOne
     @JoinColumn(name="user_group_id")
-    @RestResource(rel = "card_user_group")
     private UserGroup userGroup;
 
 

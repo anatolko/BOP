@@ -3,4 +3,4 @@
 
 * Для работы проекта нужна база данный PostgreSQL.
 * Разверните БД из файла **src/db.sql**
-* Параметры БД прописыватюся в файле **src/main/resources/application.properties**
+* Параметры БД прописываются в файле **src/main/resources/application.properties**

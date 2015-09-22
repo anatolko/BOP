@@ -1,6 +1,5 @@
 package bop.entity;
 
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -28,7 +27,6 @@ public class UserGroup implements Serializable {
     @NotNull
     @ManyToOne
     @JoinColumn(name="plant_id")
-    @RestResource(rel = "group_plant")
     private Plant plant;
 
     public int getId() {

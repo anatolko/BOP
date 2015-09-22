@@ -8,6 +8,10 @@
     obsCategory.$inject = ['$resource'];
 
     function obsCategory($resource){
-        return $resource('api/obs-categories/:id',{id:'@id'});
+        return $resource('obs-categories/:id',{},
+            {
+                'update': {method: 'PUT', params: {id: '@id'}}
+            }
+        );
     }
 })();

@@ -17,23 +17,25 @@
         <div class="form-group row" >
             <label  for="obsDep" class="col-sm-3 control-label" translate>OBSDEPARTMENT</label>
             <div  class="col-sm-8">
-                <select   id="obsDep" class="form-control" name="obsDep" ng-model="card.selectedDep" ng-required="true">
-                    <option ng-init="card.selectedDep=card.obsDepartments._embedded.obsDepartments[0].id"  ng-repeat="obsDep in card.obsDepartments._embedded.obsDepartments" value="{{obsDep.id}}">{{obsDep.name[card.lang]}}</option>
+                <select
+                        id="obsDep" class="form-control" name="obsDep"
+                        ng-model="card.selectedDep"
+                        ng-options="obsDep.name[card.lang] for obsDep in card.obsDepartments"
+                        ng-required="true">
                 </select>
             </div>
         </div>
         <hr>
-
         <div  class="checkbox-group row">
 
-            <div ng-class="{'has-error': cardForm.$invalid}" class="col-md-6" ng-repeat="obsCat in card.obsInfo">
+            <div class="col-md-6" ng-repeat="obsCat in card.obsInfo">
 
                 <label  class="control-label">
                     <input type="checkbox" checklist-value="obsCat.id" value="{{obsCat.id}}" checklist-model="card.checkedCats" ng-model="obsCat.disabled">
                     {{obsCat.name[card.lang]}}
                 </label>
 
-                <div class="checkbox" ng-repeat="item in obsCat.obsFields._embeddedItems">
+                <div class="checkbox" ng-repeat="item in obsCat.obsFields">
                     <label >
                         <input ng-disabled="!obsCat.disabled" ng-checked="obsCat.disabled && 0" type="checkbox" checklist-model="card.checkedFields"  checklist-value="item.id" value="{{item.id}}">
                         {{item.name[card.lang]}}
@@ -43,17 +45,21 @@
             </div>
         </div>
         <hr>
-        <div  class="form-group">
-            <label  for="comment" class="col-sm-3 control-label" translate>OBSCOMMENT</label>
+        <div  ng-class="{'has-error': cardForm.comment.$error.maxlength}" class="form-group">
+            <label  for="comment" class="col-sm-3 control-label" >
+                {{'OBSCOMMENT' | translate}}
+            </label>
             <div  class="col-sm-8">
-                <textarea id="comment"class="form-control" rows="5" ng-model="card.comment"></textarea>
+                <textarea ng-maxlength="512" id="comment" name="comment" class="form-control" rows="5" ng-model="card.comment"></textarea>
+                <span ng-show="cardForm.comment.$error.maxlength"   id="helpBlock" class="help-block" translate>COMMENTSIZEERROR</span>
             </div>
+
         </div>
 
     </div>
 
     <div class="modal-footer">
-        <input type='submit' class="btn btn-primary" ng-disabled="card.checkedCats.length < 1"  value="{{'DONE' | translate }}">
+        <input type='submit' class="btn btn-primary" ng-disabled="(card.checkedCats.length < 1 || cardForm.$invalid)"  value="{{'DONE' | translate }}">
         <button class="btn btn-warning" ng-click="card.cancel()"  translate>CANCEL</button>
     </div>
 </form>

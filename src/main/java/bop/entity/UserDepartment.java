@@ -4,7 +4,6 @@ import bop.usertypes.JsonMapType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -32,7 +31,6 @@ public class UserDepartment implements Serializable {
     @NotNull
     @ManyToOne
     @JoinColumn(name="plant_id")
-    @RestResource(rel = "user_department_plant_id")
     private Plant plantId;
 
     public int getId() {

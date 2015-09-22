@@ -1,4 +1,10 @@
 {
+  "USERNAME": "User name",
+  "PASSWORD": "Password",
+  "REMEMBERME": "Remember me",
+  "SIGNIN": "Sign in",
+  "PLEASESIGNIN": "Please sign in",
+
   "BOP": "BOP",
   "REPORTS":"Reports",
   "REPORTS_DESCRIPTION": "please choose one of the reports",
@@ -22,6 +28,8 @@
   "TIMEIS": "Time is: ",
   "DONE":"Done",
   "CANCEL":"Cancel",
+
+  "COMMENTSIZEERROR": "Comment can't be more than 512 characters",
 
   "WASDEVELOPEDBY": "App was developed by Anatoly Yashkin"
 

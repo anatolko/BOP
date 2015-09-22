@@ -8,6 +8,10 @@
     obsDepartment.$inject = ['$resource'];
 
     function obsDepartment($resource){
-        return $resource('api/obs-departments/:id', {id:'@id'});
+        return $resource('obs-departments/:id',{},
+            {
+                'update': {method: 'PUT', params: {id: '@id'}}
+            }
+        );
     }
 })();

@@ -5,45 +5,46 @@
         .module('app.bop')
         .controller('CardForm',CardForm);
 
-    CardForm.$inject = ['$translate','$http','obsDepartment','obsCategory','SpringDataRestAdapter','$modalInstance','Card'];
+    CardForm.$inject = ['$translate','obsDepartment','obsCategory','$modalInstance','Card'];
 
-    function CardForm($translate,$http,obsDepartment,obsCategory,SpringDataRestAdapter,$modalInstance, Card){
+    function CardForm($translate,obsDepartment,obsCategory,$modalInstance, Card){
         var vm = this;
 
         vm.checkedCats = [];
         vm.checkedFields = [];
+        vm.comment = "";
         vm.obsDate = new Date();
         vm.obsTime = new Date();
 
+        vm.plant = '{"id":1,"plantCode":"RULIP","description":"Lipetsk plant","parentPlant":null}';
+        vm.userGroup = '{"id":1,"name":"L","cardsCount":1,"plant":{"id":1,"plantCode":"RULIP","description":"Lipetsk plant","parentPlant":null}}';
 
-        var httpPromise = $http.get('api/obs-categories');
-
-        SpringDataRestAdapter.process(httpPromise, 'obsFields', true).then(function (processedResponse) {
-            vm.obsInfo = processedResponse._embeddedItems;
-            vm.processedResponse = angular.toJson(processedResponse, true);
-        });
-
-        vm.obsDepartments = obsDepartment.get();
+        vm.obsInfo = obsCategory.query();
+        vm.obsDepartments = obsDepartment.query();
         vm.lang = $translate.use();
 
 
 
+
+
         vm.ok = function () {
-            new Card(
+            Card.save(
                 {
                     cardDate: new Date(),
                     obsDate: new Date(vm.obsDate.getFullYear(), vm.obsDate.getMonth(), vm.obsDate.getDate(), vm.obsTime.getHours(), vm.obsTime.getMinutes(), vm.obsTime.getSeconds()),
                     adAccount: 'ayashkin',
                     userDepartment: 'HR',
-                    obsDepartment: "/"+vm.selectedDep,
-                    plant: "/4",
+                    obsDepartment: vm.selectedDep.toJSON(),
+                    plant: JSON.parse(vm.plant),
                     selectedFields: JSON.stringify({fields: vm.checkedFields}),
                     comment: vm.comment,
-                    userGroup: "/1",
+                    userGroup: JSON.parse(vm.userGroup),
                     selectedCategories: JSON.stringify({categories: vm.checkedCats})
-                }).save();
-
-            $modalInstance.close('ok');
+                },function(card){
+                    $modalInstance.close(card);
+                },function(e){
+                    console.log(e.data.message);
+                });
         };
         vm.cancel = function () {
             $modalInstance.dismiss('cancel');

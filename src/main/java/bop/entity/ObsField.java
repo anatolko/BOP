@@ -1,10 +1,10 @@
 package bop.entity;
 
 import bop.usertypes.JsonMapType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -41,7 +41,7 @@ public class ObsField implements Serializable {
     @NotNull
     @ManyToOne
     @JoinColumn(name="cat_id")
-    @RestResource(rel = "field_cat_id")
+    @JsonBackReference
     private ObsCategory catId;
 
     public int getId() {

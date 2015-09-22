@@ -10,6 +10,7 @@
     function HomeInfo($timeout,$scope, $modal, $http, Card, obsCategory, obsField) {
         var vm = this;
         vm.user = [];
+        vm.page = {};
 
         //vm.cards = Card.get();
 
@@ -25,14 +26,18 @@
         //getting cards for table
         $scope.$watch('currentPage',function()
         {
-            Card.query({
+            Card.get({
                     size: 5,
                     page: $scope.currentPage - 1,
                     sort: (vm.sort.sortingOrder + "," + vm.sort.order)
                 },
                 function (data) {
-                    $scope.cards = data[3];
-                    vm.page = data[1];
+                    $scope.cards = data.content;
+                    vm.page.last = data.last;
+                    vm.page.totalPages = data.totalPages;
+                    vm.page.totalElements = data.totalElements;
+                    vm.page.size = data.size;
+                    vm.page.number = data.number;
                 });
         });
 
@@ -77,14 +82,18 @@
 
             modalInstance.result.then(function () {
                 $timeout(function() {
-                    Card.query({
+                    Card.get({
                             size: 5,
                             page: $scope.currentPage - 1,
                             sort: (vm.sort.sortingOrder + "," + vm.sort.order)
                         },
                         function (data) {
-                            $scope.cards = data[3];
-                            vm.page = data[1];
+                            $scope.cards = data.content;
+                            vm.page.last = data.last;
+                            vm.page.totalPages = data.totalPages;
+                            vm.page.totalElements = data.totalElements;
+                            vm.page.size = data.size;
+                            vm.page.number = data.number;
                         });
                 })
 

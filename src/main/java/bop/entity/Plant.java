@@ -1,7 +1,7 @@
 package bop.entity;
 
 import com.fasterxml.jackson.annotation.*;
-import org.springframework.data.rest.core.annotation.RestResource;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -30,7 +30,6 @@ public class Plant implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="parent_plant_id")
-    @RestResource(rel = "parent_palnt")
     private Plant parentPlant;
 
     @OneToMany(mappedBy="parentPlant")

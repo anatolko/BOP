@@ -1,10 +1,11 @@
 package bop.entity;
 
 import bop.usertypes.JsonMapType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -34,9 +35,9 @@ public class ObsCategory implements Serializable {
     @NotNull
     @ManyToOne
     @JoinColumn(name="plant_id")
-    @RestResource(rel = "category_plant_id")
     private Plant plantId;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "catId")
     private Set<ObsField> obsFields;
 
@@ -66,5 +67,13 @@ public class ObsCategory implements Serializable {
 
     public void setPlantId(Plant plantId) {
         this.plantId = plantId;
+    }
+
+    public Set<ObsField> getObsFields() {
+        return obsFields;
+    }
+
+    public void setObsFields(Set<ObsField> obsFields) {
+        this.obsFields = obsFields;
     }
 }

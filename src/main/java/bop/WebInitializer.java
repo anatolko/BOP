@@ -3,9 +3,7 @@ package bop;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 
-/**
- * Created by Stretch on 06.08.2015.
- */
+
 public class WebInitializer extends SpringBootServletInitializer {
 
     @Override
