@@ -8,7 +8,7 @@
     Card.$inject = ['$resource'];
 
     function Card($resource) {
-        return $resource('cards/:id',{},
+        return $resource('api/cards/:id',{},
             {
                 'update': {method: 'PUT', params: {id: '@id'}}
             }

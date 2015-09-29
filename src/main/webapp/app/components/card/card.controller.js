@@ -43,7 +43,7 @@
                 },function(card){
                     $modalInstance.close(card);
                 },function(e){
-                    console.log(e.data.message);
+                    console.log(e);
                 });
         };
         vm.cancel = function () {
