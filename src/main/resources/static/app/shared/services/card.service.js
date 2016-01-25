@@ -1,4 +1,4 @@
-(function(){
+(function () {
     'use strict';
     var HATEOAS_URL = './api/cards';
     angular
@@ -8,12 +8,10 @@
     Card.$inject = ['$resource'];
 
     function Card($resource) {
-        return $resource('api/cards/:id',{},
+        return $resource('api/cards/:id', {},
             {
-                'update': {method: 'PUT', params: {id: '@id'}}
+                update: {method: 'PUT', params: {id: '@id'}}
             }
         );
     }
-
-
 })();
