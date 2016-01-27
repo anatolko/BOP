@@ -1,4 +1,4 @@
-(function(){
+(function () {
     'use strict';
 
     angular
@@ -7,10 +7,15 @@
 
     obsCategory.$inject = ['$resource'];
 
-    function obsCategory($resource){
-        return $resource('obs-categories/:id',{},
+    function obsCategory($resource) {
+        return $resource('obs-categories/:id', {},
             {
-                'update': {method: 'PUT', params: {id: '@id'}}
+                update: {
+                    method: 'PUT',
+                    params: {
+                        id: '@id'
+                    }
+                }
             }
         );
     }

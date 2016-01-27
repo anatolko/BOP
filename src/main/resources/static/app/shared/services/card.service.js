@@ -1,6 +1,5 @@
 (function () {
     'use strict';
-    var HATEOAS_URL = './api/cards';
     angular
         .module('app.bop')
         .factory('Card', Card);

@@ -3,7 +3,7 @@
 
     angular
         .module('app.bop')
-        .controller('DatepickerCtrl',DatepickerCtrl);
+        .controller('DatepickerCtrl', DatepickerCtrl);
 
     DatepickerCtrl.$inject = ['$scope'];
 
@@ -28,9 +28,10 @@
 
         function getMonday(d) {
             d = new Date(d);
-            var day = d.getDay(),
-                diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
+            var day = d.getDay();
+            var diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
+
             return new Date(d.setDate(diff));
         }
-    };
+    }
 })();

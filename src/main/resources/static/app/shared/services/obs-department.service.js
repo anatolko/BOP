@@ -1,4 +1,4 @@
-(function(){
+(function () {
     'use strict';
 
     angular
@@ -7,10 +7,15 @@
 
     obsDepartment.$inject = ['$resource'];
 
-    function obsDepartment($resource){
-        return $resource('obs-departments/:id',{},
+    function obsDepartment($resource) {
+        return $resource('obs-departments/:id', {},
             {
-                'update': {method: 'PUT', params: {id: '@id'}}
+                update: {
+                    method: 'PUT',
+                    params: {
+                        id: '@id'
+                    }
+                }
             }
         );
     }

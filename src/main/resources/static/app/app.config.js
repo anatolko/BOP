@@ -1,4 +1,4 @@
-//In this file we will config libs
+// In this file we will config libs
 (function () {
     'use strict';
 
@@ -7,7 +7,7 @@
         .config(configure);
 
     configure.$inject =
-        ['$translateProvider', 'tmhDynamicLocaleProvider','$httpProvider'];
+        ['$translateProvider', 'tmhDynamicLocaleProvider', '$httpProvider'];
 
     function configure($translateProvider, tmhDynamicLocaleProvider, $httpProvider) {
         $translateProvider.useStaticFilesLoader({
@@ -20,10 +20,8 @@
         $translateProvider.useSanitizeValueStrategy('escape');
 
         tmhDynamicLocaleProvider.useCookieStorage();
-        tmhDynamicLocaleProvider.localeLocationPattern('assets/libs/angular-i18n/angular-locale_{{locale}}.js')
+        tmhDynamicLocaleProvider.localeLocationPattern('assets/libs/angular-i18n/angular-locale_{{locale}}.js');
 
-        $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
-
-
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     }
 })();

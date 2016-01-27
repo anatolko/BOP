@@ -1,4 +1,4 @@
-(function(){
+(function () {
     'use strict';
 
     angular
@@ -7,7 +7,7 @@
 
     obsField.$inject = ['$resource'];
 
-    function obsField($resource){
-        return $resource('obs-fields/:id',{id:'@id'});
+    function obsField($resource) {
+        return $resource('obs-fields/:id', {id:'@id'});
     }
 })();
