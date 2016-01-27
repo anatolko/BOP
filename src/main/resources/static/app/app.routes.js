@@ -19,7 +19,7 @@
             .state('reports', {
                 url: '/reports',
                 templateUrl: 'app/components/reports/reports.view.html',
-                controller: 'HomeInfo'
+                controller: 'Reports'
             })
 
             .state('login', {

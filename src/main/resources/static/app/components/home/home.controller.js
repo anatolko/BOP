@@ -5,12 +5,15 @@
         .module('app.bop')
         .controller('HomeInfo', HomeInfo);
 
-    HomeInfo.$inject = ['$timeout','$scope', '$uibModal', '$http', 'Card','obsCategory','obsField'];
+    HomeInfo.$inject =
+        ['$timeout','$scope', '$uibModal', '$http', 'Card','obsCategory','obsField','$translatePartialLoader'];
 
-    function HomeInfo($timeout,$scope, $uibModal, $http, Card, obsCategory, obsField) {
+    function HomeInfo($timeout,$scope, $uibModal, $http, Card, obsCategory, obsField, $translatePartialLoader) {
         var vm = this;
         vm.user = [];
         vm.page = {};
+
+        $translatePartialLoader.addPart('home');
 
         // vm.cards = Card.get();
 

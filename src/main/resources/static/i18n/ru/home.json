@@ -1,0 +1,20 @@
+{
+  "title": "БОП",
+  "home": {
+    "userInfo": {
+      "cardsForWeek": "Карт за неделю: ",
+      "cardsTotal": "Карт всего: "
+    },
+    "table": {
+      "add": "Добавить",
+      "headers": {
+        "fillDate": "Дата заполнения",
+        "obsDateAndTime": "Дата и время наблюдения",
+        "obsDepartment": "Отдел наблюдения",
+        "obsCategories": "Наблюдения",
+        "obsFields": "Замечания",
+        "obsComment": "Комментарий"
+      }
+    }
+  }
+}

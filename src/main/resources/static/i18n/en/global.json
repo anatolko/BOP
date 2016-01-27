@@ -1,0 +1,12 @@
+{
+  "global": {
+    "menu": {
+      "reports": "Reports",
+      "help": "Helo"
+    },
+
+    "search": "Search"
+  },
+
+  "footer": "App was developed by Anatoly Yashkin"
+}

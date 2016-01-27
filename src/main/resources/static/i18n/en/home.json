@@ -1,0 +1,20 @@
+{
+  "title": "BOP",
+  "home": {
+    "userInfo": {
+      "cardsForWeek": "Cards for week: ",
+      "cardsTotal": "Cards total: "
+    },
+    "table": {
+      "add": "Add",
+      "headers": {
+        "fillDate": "Date of filling",
+        "obsDateAndTime": "Date and time of observation",
+        "obsDepartment": "Department of observation",
+        "obsCategories": "Observations",
+        "obsFields": "Remarks",
+        "obsComment": "Comment"
+      }
+    }
+  }
+}

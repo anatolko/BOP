@@ -5,8 +5,8 @@
         <center>
             <h3>{{home.user.name}}</h3>
             <em>{{home.user.department}}</em>, <em>{{home.user.site}}</em>
-            <h5 class="text-success">{{'CARDSFORWEEK' | translate}}1 / 1</h5>
-            <h5 class="text-info">{{'CARDSTOTAL' | translate}}20</h5>
+            <h5 class="text-success">{{'home.userInfo.cardsForWeek' | translate}}1 / 1</h5>
+            <h5 class="text-info">{{'home.userInfo.cardsTotal' | translate}}20</h5>
         </center>
     </div>
 
@@ -14,10 +14,10 @@
         <div class="row">
             <div class="col-xs-3">
                 <input name="search" class="form-control"
-                       type="text" ng-attr-placeholder="{{'SEARCH' | translate}}">
+                       type="text" ng-attr-placeholder="{{'global.search' | translate}}">
             </div>
             <div class="button-panel pull-right">
-                <button class="btn btn-success" ng-click="home.newCard('lg')" translate>ADD</button>
+                <button class="btn btn-success" ng-click="home.newCard('lg')" translate="home.table.add">Add</button>
             </div>
         </div>
         <!--{{home.cards}}-->
@@ -27,12 +27,12 @@
             <table class="table  table-striped">
                 <thead>
                 <tr>
-                    <th translate>FILLDATE</th>
-                    <th translate>OBSDATE</th>
-                    <th translate>OBSDEPARTMENT</th>
-                    <th translate>OBSCATEGORIES</th>
-                    <th translate>OBSFIELDS</th>
-                    <th translate>OBSCOMMENT</th>
+                    <th translate="home.table.headers.fillDate">Date of filling</th>
+                    <th translate="home.table.headers.obsDateAndTime">Date and time of observation</th>
+                    <th translate="home.table.headers.obsDepartment">Department of observation</th>
+                    <th translate="home.table.headers.obsCategories">Observations</th>
+                    <th translate="home.table.headers.obsFields">Remarks</th>
+                    <th translate="home.table.headers.obsComment">Comment</th>
                 </tr>
                 </thead>
                 <tfoot>

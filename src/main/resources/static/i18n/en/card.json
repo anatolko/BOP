@@ -1,0 +1,22 @@
+{
+  "card":{
+    "title":{
+      "create": "New BOP card",
+      "edit": "Edit BOP card"
+    },
+    "obsDepartment": "Department of observation",
+    "obsDateAndTime":{
+      "label": "Date and time of observation",
+      "dateIs": "Selected date is: ",
+      "timeIs": "Time is: "
+    },
+    "buttons": {
+      "done": "Done",
+      "cancel": "Cancel"
+    },
+    "comment": {
+      "label": "Comment ",
+      "error": "Comment can't be more than 512 characters"
+    }
+  }
+}

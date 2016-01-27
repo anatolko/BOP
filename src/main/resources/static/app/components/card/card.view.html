@@ -1,13 +1,13 @@
 <!-- Add Card modal window -->
 <div class="modal-header">
-    <h3 class="modal-title" translate>MODALADDHEAD</h3>
+    <h3 class="modal-title" translate="card.title.create">Card head</h3>
 </div>
 <form class="form-horizontal" name='cardForm' ng-submit='cardForm.$valid && card.ok()'>
     <div class="modal-body container-fluid">
         <div class="form-group row">
-            <label  for="obsDate" class="col-sm-3 control-label" translate>OBSDATEANDTIME</label>
+            <label  for="obsDate" class="col-sm-3 control-label" translate="card.obsDateAndTime.label">Date and time of observation</label>
             <div  class="col-sm-8" ng-controller="DatepickerCtrl">
-                <pre id="obsDate" class="form-control" >{{'DATEIS' | translate}}<em>{{card.obsDate | date:'longDate' }}</em> {{'TIMEIS' | translate}}{{card.obsTime | date:'H:mm' }}</pre>
+                <pre id="obsDate" class="form-control" >{{'card.obsDateAndTime.dateIs' | translate}}<em>{{card.obsDate | date:'longDate' }}</em> {{'card.obsDateAndTime.timeIs' | translate}}{{card.obsTime | date:'H:mm' }}</pre>
                 <uib-datepicker style="float: left; width: 310px;" ng-model="card.obsDate" max-date="maxDay" min-date="minDay" show-weeks="true" starting-day="1" class="well well-sm"></uib-datepicker>
                 <div>
                     <center><uib-timepicker class="obsTime" id="obsTime" ng-model="card.obsTime" hour-step="1" minute-step="1" show-meridian="false" readonly-input="false"></uib-timepicker></center>
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="form-group row" >
-            <label  for="obsDep" class="col-sm-3 control-label" translate>OBSDEPARTMENT</label>
+            <label  for="obsDep" class="col-sm-3 control-label" translate="card.obsDepartment">Department of observation</label>
             <div  class="col-sm-8">
                 <select
                         id="obsDep" class="form-control" name="obsDep"
@@ -46,12 +46,12 @@
         </div>
         <hr>
         <div  ng-class="{'has-error': cardForm.comment.$error.maxlength}" class="form-group">
-            <label  for="comment" class="col-sm-3 control-label" >
-                {{'OBSCOMMENT' | translate}}
+            <label  for="comment" class="col-sm-3 control-label" translate="card.comment.label" >
+                Comment
             </label>
             <div  class="col-sm-8">
                 <textarea ng-maxlength="512" id="comment" name="comment" class="form-control" rows="5" ng-model="card.comment"></textarea>
-                <span ng-show="cardForm.comment.$error.maxlength"   id="helpBlock" class="help-block" translate>COMMENTSIZEERROR</span>
+                <span ng-show="cardForm.comment.$error.maxlength"   id="helpBlock" class="help-block" translate="card.comment.error">Comment can't be more than 512 characters</span>
             </div>
 
         </div>
@@ -59,8 +59,8 @@
     </div>
 
     <div class="modal-footer">
-        <input type='submit' class="btn btn-primary" ng-disabled="(card.checkedCats.length < 1 || cardForm.$invalid)"  value="{{'DONE' | translate }}">
-        <button class="btn btn-warning" ng-click="card.cancel()"  translate>CANCEL</button>
+        <input type='submit' class="btn btn-primary" ng-disabled="(card.checkedCats.length < 1 || cardForm.$invalid)"  value="{{'card.buttons.done' | translate }}">
+        <button class="btn btn-warning" ng-click="card.cancel()"  translate="card.buttons.cancel">Cancel</button>
     </div>
 </form>
 <!-- Add Card modal window end-->

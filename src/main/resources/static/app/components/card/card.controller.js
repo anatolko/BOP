@@ -5,10 +5,13 @@
         .module('app.bop')
         .controller('CardForm', CardForm);
 
-    CardForm.$inject = ['$translate','obsDepartment','obsCategory','$uibModalInstance','Card'];
+    CardForm.$inject =
+        ['$translate','obsDepartment','obsCategory','$uibModalInstance','Card', '$translatePartialLoader'];
 
-    function CardForm($translate,obsDepartment,obsCategory,$uibModalInstance, Card) {
+    function CardForm($translate,obsDepartment,obsCategory,$uibModalInstance, Card, $translatePartialLoader) {
         var vm = this;
+
+        $translatePartialLoader.addPart('card');
 
         vm.checkedCats = [];
         vm.checkedFields = [];
