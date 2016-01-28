@@ -1,3 +1,4 @@
+/*global angular, console*/
 (function () {
     'use strict';
 
@@ -13,18 +14,35 @@
 
         $translatePartialLoader.addPart('card');
 
+        vm.selectedDep = '';
         vm.checkedCats = [];
         vm.checkedFields = [];
         vm.comment = '';
+        vm.obsInfo = obsCategory.query();
+        vm.obsDepartments = obsDepartment.query();
         vm.obsDate = new Date();
         vm.obsTime = new Date();
 
+        // getting current language
+        vm.lang = $translate.use();
+
+        // settings for calendar
+        vm.maxDay = new Date();
+        vm.minDay = getMonday(vm.maxDay);
+
+        // form button functions
+        vm.ok = ok;
+        vm.cancel = cancel;
+
+        // temp data about user plant
         vm.plant = {
             id: 1,
             plantCode: 'RULIP',
             description: 'Lipetsk plant',
             parentPlant: null
         };
+
+        // temp data about user group
         vm.userGroup = {
             id: 1,
             name: 'L',
@@ -37,11 +55,7 @@
             }
         };
 
-        vm.obsInfo = obsCategory.query();
-        vm.obsDepartments = obsDepartment.query();
-        vm.lang = $translate.use();
-
-        vm.ok = function () {
+        function ok() {
             Card.save(
                 {
                     cardDate: new Date(),
@@ -65,11 +79,20 @@
                     $uibModalInstance.close(card);
                 }, function (e) {
                     console.log(e);
-                });
-        };
-        vm.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
-        };
+                }
+            );
+        }
 
+        function cancel() {
+            $uibModalInstance.dismiss('cancel');
+        }
+
+        function getMonday(d) {
+            d = new Date(d);
+            var day = d.getDay();
+            var diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
+
+            return new Date(d.setDate(diff));
+        }
     }
 })();

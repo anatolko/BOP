@@ -6,9 +6,9 @@
     <div class="modal-body container-fluid">
         <div class="form-group row">
             <label  for="obsDate" class="col-sm-3 control-label" translate="card.obsDateAndTime.label">Date and time of observation</label>
-            <div  class="col-sm-8" ng-controller="DatepickerCtrl">
+            <div  class="col-sm-8">
                 <pre id="obsDate" class="form-control" >{{'card.obsDateAndTime.dateIs' | translate}}<em>{{card.obsDate | date:'longDate' }}</em> {{'card.obsDateAndTime.timeIs' | translate}}{{card.obsTime | date:'H:mm' }}</pre>
-                <uib-datepicker style="float: left; width: 310px;" ng-model="card.obsDate" max-date="maxDay" min-date="minDay" show-weeks="true" starting-day="1" class="well well-sm"></uib-datepicker>
+                <uib-datepicker style="float: left; width: 310px;" ng-model="card.obsDate" max-date="card.maxDay" min-date="card.minDay" show-weeks="true" starting-day="1" class="well well-sm"></uib-datepicker>
                 <div>
                     <center><uib-timepicker class="obsTime" id="obsTime" ng-model="card.obsTime" hour-step="1" minute-step="1" show-meridian="false" readonly-input="false"></uib-timepicker></center>
                 </div>
