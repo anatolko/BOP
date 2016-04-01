@@ -1,22 +1,56 @@
+/*global angular*/
 (function () {
     'use strict';
+    var API_URL = 'api/obs-departments';
 
     angular
         .module('app.bop')
-        .factory('obsDepartment', obsDepartment);
+        .service('obsDepartment', obsDepartment);
 
-    obsDepartment.$inject = ['$resource'];
+    obsDepartment.$inject = ['$http', '$q'];
 
-    function obsDepartment($resource) {
-        return $resource('obs-departments/:id', {},
-            {
-                update: {
-                    method: 'PUT',
-                    params: {
-                        id: '@id'
-                    }
-                }
+    function obsDepartment($http, $q) {
+
+        return ({
+            getDepartment: getDepartment,
+            getAllDepartments: getAllDepartments
+        });
+
+        function getDepartment(id) {
+            var request = $http({
+                method: 'get',
+                url: API_URL + '/' + id
+            });
+
+            return (request.then(handleSuccess, handleError));
+        }
+
+        function getAllDepartments() {
+            var request = $http({
+                method: 'get',
+                url: API_URL
+            });
+
+            return (request.then(handleSuccess, handleError));
+        }
+
+        // I transform the error response, unwrapping the application dta from
+        // the API response payload.
+        function handleError(response) {
+            // The API response from the server should be returned in a
+            // nomralized format. However, if the request was not handled by the
+            // server (or what not handles properly - ex. server error), then we
+            // may have to normalize it on our end, as best we can.
+            if (!angular.isObject(response.data) || !response.data.message) {
+                return ($q.reject('An unknown error occurred.'));
             }
-        );
+            // Otherwise, use expected error message.
+            return ($q.reject(response.data.message));
+        }
+        // I transform the successful response, unwrapping the application data
+        // from the API response payload.
+        function handleSuccess(response) {
+            return response.data;
+        }
     }
 })();

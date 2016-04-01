@@ -9,7 +9,7 @@
     CardForm.$inject =
         ['$translate','obsDepartment','obsCategory','$uibModalInstance','Card', '$translatePartialLoader'];
 
-    function CardForm($translate,obsDepartment,obsCategory,$uibModalInstance, Card, $translatePartialLoader) {
+    function CardForm($translate, obsDepartment, obsCategory, $uibModalInstance, Card, $translatePartialLoader) {
         var vm = this;
 
         $translatePartialLoader.addPart('card');
@@ -19,7 +19,7 @@
         vm.checkedFields = [];
         vm.comment = '';
         vm.obsInfo = obsCategory.query();
-        vm.obsDepartments = obsDepartment.query();
+        vm.obsDepartments = [];
         vm.obsDate = new Date();
         vm.obsTime = new Date();
 
@@ -54,6 +54,11 @@
                 parentPlant: null
             }
         };
+
+        obsDepartment.getAllDepartments()
+            .then(function (data) {
+                vm.obsDepartments = data._embedded.obsDepartments;
+            });
 
         function ok() {
             Card.save(
