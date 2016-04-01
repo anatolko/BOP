@@ -21,7 +21,6 @@
     "angular-i18n": "1.4.9",
     "angular-resource": "1.4.9",
     "angular-sanitize": "1.4.9",
-    "angular-spring-data-rest": "0.4.4",
     "angular-translate": "2.9.0",
     "angular-translate-loader-static-files": "2.9.0",
     "angular-translate-storage-cookie": "2.9.0",

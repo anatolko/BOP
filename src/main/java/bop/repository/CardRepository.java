@@ -1,8 +1,10 @@
 package bop.repository;
 
 import bop.domain.Card;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 
-public interface CardRepository extends JpaRepository<Card, Integer> {
+@RepositoryRestResource(path = "cards")
+public interface CardRepository extends PagingAndSortingRepository<Card, Integer> {
 }

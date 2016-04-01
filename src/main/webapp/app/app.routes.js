@@ -13,7 +13,8 @@
             .state('home', {
                 url: '/home',
                 templateUrl: 'app/components/home/home.view.html',
-                controller: 'HomeInfo'
+                controller: 'HomeInfo',
+                controllerAs: 'home'
             })
 
             .state('reports', {
