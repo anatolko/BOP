@@ -34,8 +34,7 @@
                     <input type="checkbox" checklist-value="obsCat.id" value="{{obsCat.id}}" checklist-model="card.checkedCats" ng-model="obsCat.disabled">
                     {{obsCat.name[card.lang]}}
                 </label>
-
-                <div class="checkbox" ng-repeat="item in obsCat.obsFields">
+                <div class="checkbox" ng-repeat="item in obsCat.obsFields._embeddedItems">
                     <label >
                         <input ng-disabled="!obsCat.disabled" ng-checked="obsCat.disabled && 0" type="checkbox" checklist-model="card.checkedFields"  checklist-value="item.id" value="{{item.id}}">
                         {{item.name[card.lang]}}

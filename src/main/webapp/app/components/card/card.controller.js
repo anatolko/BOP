@@ -18,7 +18,7 @@
         vm.checkedCats = [];
         vm.checkedFields = [];
         vm.comment = '';
-        vm.obsInfo = obsCategory.query();
+        vm.obsInfo = [];
         vm.obsDepartments = [];
         vm.obsDate = new Date();
         vm.obsTime = new Date();
@@ -60,11 +60,14 @@
                 vm.obsDepartments = data._embedded.obsDepartments;
             });
 
+        obsCategory.getAllCategories()
+            .then(function (data) {
+                vm.obsInfo = data._embeddedItems;
+            });
+
         function ok() {
-            Card.save(
-                {
-                    cardDate: new Date(),
-                    obsDate: new Date(
+            Card.addCard(
+                new Date(
                         vm.obsDate.getFullYear(),
                         vm.obsDate.getMonth(),
                         vm.obsDate.getDate(),
@@ -72,20 +75,17 @@
                         vm.obsTime.getMinutes(),
                         vm.obsTime.getSeconds()
                     ),
-                    adAccount: 'ayashkin',
-                    userDepartment: 'HR',
-                    obsDepartment: vm.selectedDep.toJSON(),
-                    plant: vm.plant,
-                    selectedFields: JSON.stringify({fields: vm.checkedFields}),
-                    comment: vm.comment,
-                    userGroup: vm.userGroup,
-                    selectedCategories: JSON.stringify({categories: vm.checkedCats})
-                }, function (card) {
-                    $uibModalInstance.close(card);
-                }, function (e) {
-                    console.log(e);
-                }
-            );
+                    'ayashkin',
+                    'HR',
+                    vm.selectedDep._links.self,
+                    vm.plant.id,
+                    JSON.stringify({categories: vm.checkedCats}),
+                    JSON.stringify({fields: vm.checkedFields}),
+                    vm.comment,
+                    vm.userGroup.id
+            ).then(function (card) {
+                $uibModalInstance.close(card);
+            });
         }
 
         function cancel() {

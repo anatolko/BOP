@@ -13,9 +13,41 @@
 
         // public API
         return ({
+            addCard: addCard,
             getCard: getCard,
             getAllCards: getAllCards
         });
+
+        function addCard(
+            obsDate,
+            profileId,
+            userDeparment,
+            obsDepartment,
+            plant,
+            selectedCategories,
+            selectedFields,
+            comment,
+            userGroup            
+        ) {
+            var request = $http({
+                method: 'post',
+                url: API_URL,
+                data: {
+                    cardDate: new Date(),
+                    obsDate: obsDate,
+                    adAccount: profileId,
+                    userDepartment: userDeparment,
+                    obsDepartment: obsDepartment,
+                    plant: plant,
+                    selectedCategories: selectedCategories,
+                    selectedFields: selectedFields,
+                    comment: comment,
+                    userGroup: userGroup
+                }
+            });
+
+            return (request.then(handleSuccess, handleError));
+        }
 
         /**
          * get one card by id

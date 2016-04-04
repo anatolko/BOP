@@ -8,6 +8,6 @@
     obsField.$inject = ['$resource'];
 
     function obsField($resource) {
-        return $resource('obs-fields/:id', {id:'@id'});
+        return $resource('api/obs-fields/:id', {id:'@id'});
     }
 })();

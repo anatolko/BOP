@@ -40,8 +40,11 @@
             var resultArr = [];
             if (typeof idArr !== 'undefined') {
                 idArr.forEach(function (id) {
-                    var cat = obsCategory.get({id: id});
-                    resultArr.push(cat);
+                    obsCategory.getCategory(id)
+                        .then(function (data) {
+                            var cat = data;
+                            resultArr.push(cat);
+                        });
                 });
             }
             return resultArr;
