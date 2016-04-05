@@ -20,7 +20,7 @@ import org.postgresql.util.PGobject;
  */
 public class JsonMapType implements UserType {
 
-    protected static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     static {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

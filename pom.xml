@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.3.2.RELEASE</version>
+        <version>1.3.3.RELEASE</version>
     </parent>
 
     <dependencies>
@@ -50,22 +50,17 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.0.7.Final</version>
+            <version>5.1.0.Final</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.0.7.Final</version>
+            <version>5.1.0.Final</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-remote-shell</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
@@ -102,60 +97,60 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>0.0.27</version>
+            <!--<plugin>-->
+                <!--<groupId>com.github.eirslett</groupId>-->
+                <!--<artifactId>frontend-maven-plugin</artifactId>-->
+                <!--<version>0.0.27</version>-->
 
-                <executions>
-                    <execution>
-                        <id>install node and npm</id>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                        </goals>
-                        <configuration>
-                            <nodeVersion>v0.12.3</nodeVersion>
-                            <npmVersion>2.9.1</npmVersion>
-                        </configuration>
-                    </execution>
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>install node and npm</id>-->
+                        <!--<goals>-->
+                            <!--<goal>install-node-and-npm</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<nodeVersion>v0.12.3</nodeVersion>-->
+                            <!--<npmVersion>2.9.1</npmVersion>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
 
-                    <execution>
-                        <id>npm install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <!-- Optional configuration which provides for running any npm command -->
-                        <configuration>
-                            <arguments>install</arguments>
-                        </configuration>
-                    </execution>
+                    <!--<execution>-->
+                        <!--<id>npm install</id>-->
+                        <!--<goals>-->
+                            <!--<goal>npm</goal>-->
+                        <!--</goals>-->
+                        <!--&lt;!&ndash; Optional configuration which provides for running any npm command &ndash;&gt;-->
+                        <!--<configuration>-->
+                            <!--<arguments>install</arguments>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
 
-                    <execution>
-                        <id>bower install</id>
-                        <goals>
-                            <goal>bower</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>install</arguments>
-                        </configuration>
-                    </execution>
+                    <!--<execution>-->
+                        <!--<id>bower install</id>-->
+                        <!--<goals>-->
+                            <!--<goal>bower</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<arguments>install</arguments>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
 
-                    <!-- <execution>
-                         <id>gulp build</id>
-                         <goals>
-                             <goal>gulp</goal>
-                         </goals>
+                    <!--&lt;!&ndash; <execution>-->
+                         <!--<id>gulp build</id>-->
+                         <!--<goals>-->
+                             <!--<goal>gulp</goal>-->
+                         <!--</goals>-->
 
 
-                        <phase>generate-resources</phase>
+                        <!--<phase>generate-resources</phase>-->
 
-                        <configuration>
+                        <!--<configuration>-->
 
-                            <arguments>build</arguments>
-                        </configuration>
-                    </execution> -->
-                </executions>
-            </plugin>
+                            <!--<arguments>build</arguments>-->
+                        <!--</configuration>-->
+                    <!--</execution> &ndash;&gt;-->
+                <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 

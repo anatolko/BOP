@@ -12,8 +12,7 @@
         var vm = this;
         vm.user = [];
         vm.page = {};
-
-        $translatePartialLoader.addPart('home');
+        vm.cardsPerPage = 5;
 
         // variable for table sorting
         vm.sort = {
@@ -22,13 +21,19 @@
             reverse: false
         };
 
+        $translatePartialLoader.addPart('home');
+
         // getting cards for table
-        $scope.$watch('currentPage', function () {
-            Card.getAllCards(5, $scope.currentPage - 1, (vm.sort.sortingOrder + ',' + vm.sort.order))
+        function getAllCards() {
+            Card.getAllCards(vm.cardsPerPage, $scope.currentPage - 1, (vm.sort.sortingOrder + ',' + vm.sort.order))
                 .then(function (data) {
                     vm.cards = data._embeddedItems;
                     vm.page = data.page;
                 });
+        }
+
+        $scope.$watch('currentPage', function () {
+            getAllCards();
         });
 
         /**
@@ -42,8 +47,7 @@
                 idArr.forEach(function (id) {
                     obsCategory.getCategory(id)
                         .then(function (data) {
-                            var cat = data;
-                            resultArr.push(cat);
+                            resultArr.push(data);
                         });
                 });
             }
@@ -73,7 +77,7 @@
         /*ui.bootstrap.modal*/
         /**
          * function opening modal window to create new BOP card
-         * @param size size of modal window
+         * @param size of modal window
          */
         vm.newCard = function (size) {
             var modalInstance = $uibModal.open({
@@ -83,21 +87,10 @@
                 backdrop: 'static'
             });
 
+            // update table with cards after modal closing
             modalInstance.result.then(function () {
                 $timeout(function () {
-                    Card.get({
-                            size: 5,
-                            page: $scope.currentPage - 1,
-                            sort: (vm.sort.sortingOrder + ',' + vm.sort.order)
-                        },
-                        function (data) {
-                            $scope.cards = data.content;
-                            vm.page.last = data.last;
-                            vm.page.totalPages = data.totalPages;
-                            vm.page.totalElements = data.totalElements;
-                            vm.page.size = data.size;
-                            vm.page.number = data.number;
-                        });
+                    getAllCards();
                 });
             });
         };

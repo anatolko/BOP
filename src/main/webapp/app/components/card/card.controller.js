@@ -39,7 +39,8 @@
             id: 1,
             plantCode: 'RULIP',
             description: 'Lipetsk plant',
-            parentPlant: null
+            parentPlant: null,
+            link: {href: 'http://localhost:8080/api/plants/1'}
         };
 
         // temp data about user group
@@ -52,7 +53,8 @@
                 plantCode: 'RULIP',
                 description: 'Lipetsk plant',
                 parentPlant: null
-            }
+            },
+            link: {href: 'http://localhost:8080/api/user-groups/1'}
         };
 
         obsDepartment.getAllDepartments()
@@ -77,12 +79,12 @@
                     ),
                     'ayashkin',
                     'HR',
-                    vm.selectedDep._links.self,
-                    vm.plant.id,
+                    vm.selectedDep._links.self.href,
+                    vm.plant.link.href,
                     JSON.stringify({categories: vm.checkedCats}),
                     JSON.stringify({fields: vm.checkedFields}),
                     vm.comment,
-                    vm.userGroup.id
+                    vm.userGroup.link.href
             ).then(function (card) {
                 $uibModalInstance.close(card);
             });
