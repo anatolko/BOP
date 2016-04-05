@@ -1,6 +1,7 @@
 package bop.domain;
 
 
+import bop.domain.user.UserGroup;
 import bop.domain.usertypes.JsonMapType;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

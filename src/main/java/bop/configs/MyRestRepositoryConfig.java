@@ -1,15 +1,12 @@
 package bop.configs;
 
 import bop.domain.*;
-import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.context.annotation.Bean;
+import bop.domain.user.User;
+import bop.domain.user.UserGroup;
+import bop.domain.user.UserRole;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.repository.support.Repositories;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
-import org.springframework.data.rest.core.event.ValidatingRepositoryEventListener;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
-import org.springframework.validation.Validator;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 // changing default configuration for our REST
 @Configuration
@@ -29,6 +26,8 @@ public class MyRestRepositoryConfig extends RepositoryRestMvcConfiguration {
         config.exposeIdsFor(ObsField.class);
         config.exposeIdsFor(ObsCategory.class);
         config.exposeIdsFor(UserGroup.class);
+        config.exposeIdsFor(User.class);
+        config.exposeIdsFor(UserRole.class);
 
         return config;
     }

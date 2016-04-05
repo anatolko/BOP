@@ -27,7 +27,7 @@
             selectedCategories,
             selectedFields,
             comment,
-            userGroup            
+            userGroup
         ) {
             var request = $http({
                 method: 'post',

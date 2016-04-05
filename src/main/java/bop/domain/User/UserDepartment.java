@@ -1,5 +1,6 @@
-package bop.domain;
+package bop.domain.user;
 
+import bop.domain.Plant;
 import bop.domain.usertypes.JsonMapType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;

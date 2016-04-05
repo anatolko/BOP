@@ -1,479 +1,796 @@
-/*
-Navicat PGSQL Data Transfer
+--
+-- PostgreSQL database dump
+--
 
-Source Server         : PostgreSQL
-Source Server Version : 90404
-Source Host           : localhost:5432
-Source Database       : RULIPBOP
-Source Schema         : public
+-- Dumped from database version 9.5.0
+-- Dumped by pg_dump version 9.5.0
 
-Target Server Type    : PGSQL
-Target Server Version : 90404
-File Encoding         : 65001
+-- Started on 2016-04-05 15:57:53
 
-Date: 2015-09-07 10:37:09
-*/
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+DROP DATABASE "RULIPBOP";
+--
+-- TOC entry 2207 (class 1262 OID 16394)
+-- Name: RULIPBOP; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE "RULIPBOP" WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'Russian_Russia.1251' LC_CTYPE = 'Russian_Russia.1251';
 
 
--- ----------------------------
--- Sequence structure for cards_sec
--- ----------------------------
-DROP SEQUENCE "cards_sec";
-CREATE SEQUENCE "cards_sec"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 5
- CACHE 1;
-SELECT setval('"public"."cards_sec"', 5, true);
+ALTER DATABASE "RULIPBOP" OWNER TO postgres;
 
--- ----------------------------
--- Sequence structure for hibernate_sequence
--- ----------------------------
-DROP SEQUENCE "hibernate_sequence";
-CREATE SEQUENCE "hibernate_sequence"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 75
- CACHE 1;
-SELECT setval('"public"."hibernate_sequence"', 75, true);
+\connect "RULIPBOP"
 
--- ----------------------------
--- Sequence structure for obs_cat_id
--- ----------------------------
-DROP SEQUENCE "obs_cat_id";
-CREATE SEQUENCE "obs_cat_id"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 5
- CACHE 1;
-SELECT setval('"public"."obs_cat_id"', 5, true);
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
 
--- ----------------------------
--- Sequence structure for obs_dep_sec
--- ----------------------------
-DROP SEQUENCE "obs_dep_sec";
-CREATE SEQUENCE "obs_dep_sec"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 5
- CACHE 1;
-SELECT setval('"public"."obs_dep_sec"', 5, true);
+--
+-- TOC entry 5 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
+--
 
--- ----------------------------
--- Sequence structure for obs_fields_id_seq
--- ----------------------------
-DROP SEQUENCE "obs_fields_id_seq";
-CREATE SEQUENCE "obs_fields_id_seq"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 39
- CACHE 1;
-SELECT setval('"public"."obs_fields_id_seq"', 39, true);
+CREATE SCHEMA public;
 
--- ----------------------------
--- Sequence structure for plants_sec
--- ----------------------------
-DROP SEQUENCE "plants_sec";
-CREATE SEQUENCE "plants_sec"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 5
- CACHE 1;
-SELECT setval('"public"."plants_sec"', 5, true);
 
--- ----------------------------
--- Sequence structure for user_departments_id_seq
--- ----------------------------
-DROP SEQUENCE "user_departments_id_seq";
-CREATE SEQUENCE "user_departments_id_seq"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 1
- CACHE 1;
-SELECT setval('"public"."user_departments_id_seq"', 1, true);
+ALTER SCHEMA public OWNER TO postgres;
 
--- ----------------------------
--- Sequence structure for user_groups_id_seq
--- ----------------------------
-DROP SEQUENCE "user_groups_id_seq";
-CREATE SEQUENCE "user_groups_id_seq"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 10
- CACHE 1;
-SELECT setval('"public"."user_groups_id_seq"', 10, true);
+--
+-- TOC entry 2208 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
+--
 
--- ----------------------------
--- Sequence structure for users_id_seq
--- ----------------------------
-DROP SEQUENCE "users_id_seq";
-CREATE SEQUENCE "users_id_seq"
- INCREMENT 1
- MINVALUE 1
- MAXVALUE 9223372036854775807
- START 1
- CACHE 1;
-SELECT setval('"public"."users_id_seq"', 1, true);
+COMMENT ON SCHEMA public IS 'standard public schema';
 
--- ----------------------------
--- Table structure for cards
--- ----------------------------
-DROP TABLE IF EXISTS "cards";
-CREATE TABLE "cards" (
-"id" int4 DEFAULT nextval('cards_sec'::regclass) NOT NULL,
-"card_date" timestamp(6) NOT NULL,
-"obs_date" timestamp(6) NOT NULL,
-"ad_account" varchar(255) COLLATE "default" NOT NULL,
-"user_department" varchar(255) COLLATE "default" NOT NULL,
-"obs_department_id" int4 NOT NULL,
-"plant_id" int4 NOT NULL,
-"selected_fields" json,
-"comment" varchar(1024) COLLATE "default",
-"user_group_id" int4 NOT NULL,
-"selected_categories" json
-)
-WITH (OIDS=FALSE)
 
-;
+--
+-- TOC entry 199 (class 3079 OID 12355)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
 
--- ----------------------------
--- Records of cards
--- ----------------------------
-BEGIN;
-INSERT INTO "cards" VALUES ('62', '2015-09-03 14:33:51.881', '2015-09-01 08:33:31', 'ayashkin', 'HR', '4', '4', '{"fields":[2,36]}', 'комментарий', '1', '{"categories":[1,5]}');
-INSERT INTO "cards" VALUES ('63', '2015-09-03 14:35:30.698', '2015-09-03 14:35:24', 'ayashkin', 'HR', '5', '4', '{"fields":[5,23]}', null, '1', '{"categories":[1,3]}');
-INSERT INTO "cards" VALUES ('64', '2015-09-03 14:44:06.253', '2015-09-01 09:43:45', 'ayashkin', 'HR', '4', '4', '{"fields":[12,19]}', 'ssssssss', '1', '{"categories":[1,2]}');
-INSERT INTO "cards" VALUES ('65', '2015-09-03 14:45:40.813', '2015-09-03 14:45:35', 'ayashkin', 'HR', '1', '4', '{"fields":[22]}', null, '1', '{"categories":[3]}');
-INSERT INTO "cards" VALUES ('66', '2015-09-03 14:45:44.918', '2015-09-03 14:45:42', 'ayashkin', 'HR', '1', '4', '{"fields":[10]}', null, '1', '{"categories":[1]}');
-INSERT INTO "cards" VALUES ('67', '2015-09-03 14:45:49.001', '2015-09-03 14:45:46', 'ayashkin', 'HR', '1', '4', '{"fields":[15,18]}', null, '1', '{"categories":[2]}');
-INSERT INTO "cards" VALUES ('68', '2015-09-03 14:46:10.445', '2015-09-03 14:46:07', 'ayashkin', 'HR', '1', '4', '{"fields":[15]}', null, '1', '{"categories":[2]}');
-INSERT INTO "cards" VALUES ('69', '2015-09-03 14:48:04.41', '2015-09-03 14:48:00', 'ayashkin', 'HR', '1', '4', '{"fields":[2,7]}', null, '1', '{"categories":[1]}');
-INSERT INTO "cards" VALUES ('70', '2015-09-03 14:58:47.326', '2015-09-03 14:58:41', 'ayashkin', 'HR', '1', '4', '{"fields":[]}', null, '1', '{"categories":[]}');
-INSERT INTO "cards" VALUES ('71', '2015-09-03 20:15:04.643', '2015-09-01 14:14:26', 'ayashkin', 'HR', '4', '4', '{"fields":[35]}', 'ужас!', '1', '{"categories":[5]}');
-INSERT INTO "cards" VALUES ('72', '2015-09-03 20:49:07.709', '2015-09-03 20:49:03', 'ayashkin', 'HR', '1', '4', '{"fields":[19,15]}', null, '1', '{"categories":[2]}');
-INSERT INTO "cards" VALUES ('73', '2015-09-03 20:50:03.692', '2015-09-03 20:50:01', 'ayashkin', 'HR', '1', '4', '{"fields":[]}', null, '1', '{"categories":[]}');
-INSERT INTO "cards" VALUES ('74', '2015-09-03 21:53:14.439', '2015-09-03 21:53:08', 'ayashkin', 'HR', '1', '4', '{"fields":[]}', null, '1', '{"categories":[]}');
-INSERT INTO "cards" VALUES ('75', '2015-09-07 10:35:11.653', '2015-09-07 10:34:56', 'ayashkin', 'HR', '1', '4', '{"fields":[38]}', null, '1', '{"categories":[5]}');
-COMMIT;
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
--- ----------------------------
--- Table structure for obs_categories
--- ----------------------------
-DROP TABLE IF EXISTS "obs_categories";
-CREATE TABLE "obs_categories" (
-"id" int4 DEFAULT nextval('obs_cat_id'::regclass) NOT NULL,
-"name" json NOT NULL,
-"plant_id" int4 NOT NULL
-)
-WITH (OIDS=FALSE)
 
-;
+--
+-- TOC entry 2210 (class 0 OID 0)
+-- Dependencies: 199
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
 
--- ----------------------------
--- Records of obs_categories
--- ----------------------------
-BEGIN;
-INSERT INTO "obs_categories" VALUES ('1', '{"ru":"Средства индивидуальной защиты","en":"Personal protective equipment"}', '1');
-INSERT INTO "obs_categories" VALUES ('2', '{"ru":"Реакция сотрудника","en":"Employee reaction"}', '1');
-INSERT INTO "obs_categories" VALUES ('3', '{"ru":"Положение, поведение сотрудника","en":"tmp"}', '1');
-INSERT INTO "obs_categories" VALUES ('4', '{"ru":"Инструменты и оборудование","en":"tmp"}', '1');
-INSERT INTO "obs_categories" VALUES ('5', '{"ru":"Процедуры порядка и чистоты","en":"tmp"}', '1');
-COMMIT;
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
--- ----------------------------
--- Table structure for obs_departments
--- ----------------------------
-DROP TABLE IF EXISTS "obs_departments";
-CREATE TABLE "obs_departments" (
-"id" int4 DEFAULT nextval('obs_dep_sec'::regclass) NOT NULL,
-"name" json,
-"plant_id" int4
-)
-WITH (OIDS=FALSE)
 
-;
+SET search_path = public, pg_catalog;
 
--- ----------------------------
--- Records of obs_departments
--- ----------------------------
-BEGIN;
-INSERT INTO "obs_departments" VALUES ('1', '{"ru":"Столовая","en":"Canteen"}', '1');
-INSERT INTO "obs_departments" VALUES ('4', '{"ru":"Участок мокрого волочения","en":"Wet wire drawning"}', '1');
-INSERT INTO "obs_departments" VALUES ('5', '{"ru":"Участок навивки канатов","en":"Bunching"}', '1');
-COMMIT;
+SET default_tablespace = '';
 
--- ----------------------------
--- Table structure for obs_fields
--- ----------------------------
-DROP TABLE IF EXISTS "obs_fields";
-CREATE TABLE "obs_fields" (
-"id" int4 DEFAULT nextval('obs_fields_id_seq'::regclass) NOT NULL,
-"cat_id" int4 NOT NULL,
-"name" json NOT NULL,
-"description" json
-)
-WITH (OIDS=FALSE)
+SET default_with_oids = false;
 
-;
+--
+-- TOC entry 189 (class 1259 OID 16413)
+-- Name: cards; Type: TABLE; Schema: public; Owner: postgres
+--
 
--- ----------------------------
--- Records of obs_fields
--- ----------------------------
-BEGIN;
-INSERT INTO "obs_fields" VALUES ('2', '1', '{"ru":"Голова","en":"Head"}', null);
-INSERT INTO "obs_fields" VALUES ('4', '1', '{"ru":"Глаза и лицо","en":"Eyes and face"}', null);
-INSERT INTO "obs_fields" VALUES ('5', '1', '{"ru":"Органы дыхания","en":"Respiratory organs"}', null);
-INSERT INTO "obs_fields" VALUES ('7', '1', '{"ru":"Уши","en":"Ears"}', null);
-INSERT INTO "obs_fields" VALUES ('9', '1', '{"ru":"Руки","en":"Arms"}', null);
-INSERT INTO "obs_fields" VALUES ('10', '1', '{"ru":"Туловище","en":"Body"}', null);
-INSERT INTO "obs_fields" VALUES ('12', '1', '{"ru":"Ноги и ступни","en":"Legs"}', null);
-INSERT INTO "obs_fields" VALUES ('13', '2', '{"ru":"Не надевает СИЗ","en":"Not wearing PPE"}', null);
-INSERT INTO "obs_fields" VALUES ('14', '2', '{"ru":"Не меняет положение в работе","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('15', '2', '{"ru":"Прекращает работу","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('16', '2', '{"ru":"Не проводт блокировку/маркировку/заземление","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('18', '2', '{"ru":"Не меняет оборудование или инструмент","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('19', '2', '{"ru":"Работает в часах, кольцах и т.п.","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('20', '2', '{"ru":"Не убраны длинные волосы","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('21', '2', '{"ru":"На производстве используются мобильные телефоны","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('22', '3', '{"ru":"Находится между/в/на объектаъ","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('23', '3', '{"ru":"Бьет по объекту/объект попадает по нему","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('24', '3', '{"ru":"Работа на высоте","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('25', '3', '{"ru":"Контакт с высокой температурой","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('26', '3', '{"ru":"Работа с электрооборудованием","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('27', '3', '{"ru":"Работа с химвеществами","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('28', '3', '{"ru":"Повторяющиеся движения","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('30', '3', '{"ru":"Опасное положение","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('31', '4', '{"ru":"Не соответствует выполняемой работе","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('32', '4', '{"ru":"Неправильное использование","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('33', '4', '{"ru":"Непригодно для работы","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('35', '5', '{"ru":"Непригодные","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('36', '5', '{"ru":"Невыполненные","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('38', '5', '{"ru":"Неизвестные","en":"tmp"}', null);
-INSERT INTO "obs_fields" VALUES ('39', '5', '{"ru":"Неустановленные","en":"tmp"}', null);
-COMMIT;
+CREATE TABLE cards (
+    id integer NOT NULL,
+    card_date timestamp(6) without time zone NOT NULL,
+    obs_date timestamp(6) without time zone NOT NULL,
+    ad_account character varying(255) NOT NULL,
+    user_department character varying(255) NOT NULL,
+    obs_department_id integer NOT NULL,
+    plant_id integer NOT NULL,
+    selected_fields json,
+    comment character varying(1024),
+    user_group_id integer NOT NULL,
+    selected_categories json
+);
 
--- ----------------------------
--- Table structure for plants
--- ----------------------------
-DROP TABLE IF EXISTS "plants";
-CREATE TABLE "plants" (
-"id" int4 DEFAULT nextval('plants_sec'::regclass) NOT NULL,
-"plant_code" varchar(255) COLLATE "default" NOT NULL,
-"description" varchar(255) COLLATE "default",
-"parent_plant_id" int4
-)
-WITH (OIDS=FALSE)
 
-;
+ALTER TABLE cards OWNER TO postgres;
 
--- ----------------------------
--- Records of plants
--- ----------------------------
-BEGIN;
-INSERT INTO "plants" VALUES ('1', 'RULIP', 'Lipetsk plant', null);
-INSERT INTO "plants" VALUES ('2', 'SKHLO', 'Slovakia Hlohovec', null);
-INSERT INTO "plants" VALUES ('3', 'SKSLA', 'Slovakia Sladko', null);
-INSERT INTO "plants" VALUES ('4', 'RR', 'Hlohovec subsite', '2');
-INSERT INTO "plants" VALUES ('5', 'IP', 'Hlohovec subsite', '2');
-COMMIT;
+--
+-- TOC entry 180 (class 1259 OID 16395)
+-- Name: cards_sec; Type: SEQUENCE; Schema: public; Owner: postgres
+--
 
--- ----------------------------
--- Table structure for user_departments
--- ----------------------------
-DROP TABLE IF EXISTS "user_departments";
-CREATE TABLE "user_departments" (
-"id" int4 DEFAULT nextval('user_departments_id_seq'::regclass) NOT NULL,
-"name" json NOT NULL,
-"plant_id" int4 NOT NULL
-)
-WITH (OIDS=FALSE)
+CREATE SEQUENCE cards_sec
+    START WITH 5
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
-;
 
--- ----------------------------
--- Records of user_departments
--- ----------------------------
-BEGIN;
-INSERT INTO "user_departments" VALUES ('1', '{"ru":"Отдел кадров","en":"HR"}', '1');
-COMMIT;
+ALTER TABLE cards_sec OWNER TO postgres;
 
--- ----------------------------
--- Table structure for user_groups
--- ----------------------------
-DROP TABLE IF EXISTS "user_groups";
-CREATE TABLE "user_groups" (
-"id" int4 DEFAULT nextval('user_groups_id_seq'::regclass) NOT NULL,
-"name" varchar(35) COLLATE "default" NOT NULL,
-"cards_count" int4 DEFAULT 0 NOT NULL,
-"plant_id" int4 NOT NULL
-)
-WITH (OIDS=FALSE)
+--
+-- TOC entry 2211 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: cards_sec; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
 
-;
+ALTER SEQUENCE cards_sec OWNED BY cards.id;
 
--- ----------------------------
--- Records of user_groups
--- ----------------------------
-BEGIN;
-INSERT INTO "user_groups" VALUES ('1', 'L', '1', '1');
-INSERT INTO "user_groups" VALUES ('4', 'H', '2', '1');
-INSERT INTO "user_groups" VALUES ('5', 'L', '2', '4');
-INSERT INTO "user_groups" VALUES ('6', 'H', '4', '4');
-INSERT INTO "user_groups" VALUES ('7', 'L', '2', '5');
-INSERT INTO "user_groups" VALUES ('8', 'H', '4', '5');
-INSERT INTO "user_groups" VALUES ('9', 'L', '2', '3');
-INSERT INTO "user_groups" VALUES ('10', 'H', '4', '3');
-COMMIT;
 
--- ----------------------------
--- Table structure for users
--- ----------------------------
-DROP TABLE IF EXISTS "users";
-CREATE TABLE "users" (
-"id" int4 DEFAULT nextval('users_id_seq'::regclass) NOT NULL,
-"first_name" varchar(255) COLLATE "default" NOT NULL,
-"last_name" varchar(255) COLLATE "default",
-"ad_account" varchar(255) COLLATE "default" NOT NULL,
-"user_department_id" int4 NOT NULL,
-"user_group_id" int4 NOT NULL,
-"plant_id" int4 NOT NULL,
-"admin" bool DEFAULT false NOT NULL,
-"moderator" bool DEFAULT false NOT NULL
-)
-WITH (OIDS=FALSE)
+--
+-- TOC entry 181 (class 1259 OID 16397)
+-- Name: hibernate_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
+--
 
-;
+CREATE SEQUENCE hibernate_sequence
+    START WITH 75
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
--- ----------------------------
--- Records of users
--- ----------------------------
-BEGIN;
-INSERT INTO "users" VALUES ('1', 'Анатолий', 'Яшкин', 'anatoly.yashkin', '1', '1', '1', 't', 'f');
-COMMIT;
 
--- ----------------------------
--- Alter Sequences Owned By 
--- ----------------------------
-ALTER SEQUENCE "cards_sec" OWNED BY "cards"."id";
-ALTER SEQUENCE "obs_cat_id" OWNED BY "obs_categories"."id";
-ALTER SEQUENCE "obs_dep_sec" OWNED BY "obs_departments"."id";
-ALTER SEQUENCE "obs_fields_id_seq" OWNED BY "obs_fields"."id";
-ALTER SEQUENCE "plants_sec" OWNED BY "plants"."id";
-ALTER SEQUENCE "user_departments_id_seq" OWNED BY "user_departments"."id";
-ALTER SEQUENCE "user_groups_id_seq" OWNED BY "user_groups"."id";
-ALTER SEQUENCE "users_id_seq" OWNED BY "users"."id";
+ALTER TABLE hibernate_sequence OWNER TO postgres;
 
--- ----------------------------
--- Uniques structure for table cards
--- ----------------------------
-ALTER TABLE "cards" ADD UNIQUE ("id");
+--
+-- TOC entry 190 (class 1259 OID 16420)
+-- Name: obs_categories; Type: TABLE; Schema: public; Owner: postgres
+--
 
--- ----------------------------
--- Primary Key structure for table cards
--- ----------------------------
-ALTER TABLE "cards" ADD PRIMARY KEY ("id");
+CREATE TABLE obs_categories (
+    id integer NOT NULL,
+    name json NOT NULL,
+    plant_id integer NOT NULL
+);
 
--- ----------------------------
--- Primary Key structure for table obs_categories
--- ----------------------------
-ALTER TABLE "obs_categories" ADD PRIMARY KEY ("id");
 
--- ----------------------------
--- Primary Key structure for table obs_departments
--- ----------------------------
-ALTER TABLE "obs_departments" ADD PRIMARY KEY ("id");
+ALTER TABLE obs_categories OWNER TO postgres;
 
--- ----------------------------
--- Primary Key structure for table obs_fields
--- ----------------------------
-ALTER TABLE "obs_fields" ADD PRIMARY KEY ("id");
+--
+-- TOC entry 182 (class 1259 OID 16399)
+-- Name: obs_cat_id; Type: SEQUENCE; Schema: public; Owner: postgres
+--
 
--- ----------------------------
--- Uniques structure for table plants
--- ----------------------------
-ALTER TABLE "plants" ADD UNIQUE ("id");
+CREATE SEQUENCE obs_cat_id
+    START WITH 5
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
--- ----------------------------
--- Primary Key structure for table plants
--- ----------------------------
-ALTER TABLE "plants" ADD PRIMARY KEY ("id");
 
--- ----------------------------
--- Primary Key structure for table user_departments
--- ----------------------------
-ALTER TABLE "user_departments" ADD PRIMARY KEY ("id");
+ALTER TABLE obs_cat_id OWNER TO postgres;
 
--- ----------------------------
--- Primary Key structure for table user_groups
--- ----------------------------
-ALTER TABLE "user_groups" ADD PRIMARY KEY ("id");
+--
+-- TOC entry 2212 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: obs_cat_id; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
 
--- ----------------------------
--- Primary Key structure for table users
--- ----------------------------
-ALTER TABLE "users" ADD PRIMARY KEY ("id");
+ALTER SEQUENCE obs_cat_id OWNED BY obs_categories.id;
 
--- ----------------------------
--- Foreign Key structure for table "cards"
--- ----------------------------
-ALTER TABLE "cards" ADD FOREIGN KEY ("user_group_id") REFERENCES "user_groups" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE "cards" ADD FOREIGN KEY ("user_group_id") REFERENCES "user_groups" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "cards" ADD FOREIGN KEY ("plant_id") REFERENCES "plants" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "cards" ADD FOREIGN KEY ("obs_department_id") REFERENCES "obs_departments" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "cards" ADD FOREIGN KEY ("obs_department_id") REFERENCES "obs_departments" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE "cards" ADD FOREIGN KEY ("plant_id") REFERENCES "plants" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- ----------------------------
--- Foreign Key structure for table "obs_categories"
--- ----------------------------
-ALTER TABLE "obs_categories" ADD FOREIGN KEY ("plant_id") REFERENCES "plants" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE "obs_categories" ADD FOREIGN KEY ("plant_id") REFERENCES "plants" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+--
+-- TOC entry 191 (class 1259 OID 16427)
+-- Name: obs_departments; Type: TABLE; Schema: public; Owner: postgres
+--
 
--- ----------------------------
--- Foreign Key structure for table "obs_departments"
--- ----------------------------
-ALTER TABLE "obs_departments" ADD FOREIGN KEY ("plant_id") REFERENCES "plants" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE "obs_departments" ADD FOREIGN KEY ("plant_id") REFERENCES "plants" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+CREATE TABLE obs_departments (
+    id integer NOT NULL,
+    name json,
+    plant_id integer
+);
 
--- ----------------------------
--- Foreign Key structure for table "obs_fields"
--- ----------------------------
-ALTER TABLE "obs_fields" ADD FOREIGN KEY ("cat_id") REFERENCES "obs_categories" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "obs_fields" ADD FOREIGN KEY ("cat_id") REFERENCES "obs_categories" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- ----------------------------
--- Foreign Key structure for table "plants"
--- ----------------------------
-ALTER TABLE "plants" ADD FOREIGN KEY ("parent_plant_id") REFERENCES "plants" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "plants" ADD FOREIGN KEY ("parent_plant_id") REFERENCES "plants" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE "plants" ADD FOREIGN KEY ("id") REFERENCES "plants" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE obs_departments OWNER TO postgres;
 
--- ----------------------------
--- Foreign Key structure for table "user_departments"
--- ----------------------------
-ALTER TABLE "user_departments" ADD FOREIGN KEY ("plant_id") REFERENCES "plants" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "user_departments" ADD FOREIGN KEY ("plant_id") REFERENCES "plants" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+--
+-- TOC entry 183 (class 1259 OID 16401)
+-- Name: obs_dep_sec; Type: SEQUENCE; Schema: public; Owner: postgres
+--
 
--- ----------------------------
--- Foreign Key structure for table "user_groups"
--- ----------------------------
-ALTER TABLE "user_groups" ADD FOREIGN KEY ("plant_id") REFERENCES "plants" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "user_groups" ADD FOREIGN KEY ("plant_id") REFERENCES "plants" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
+CREATE SEQUENCE obs_dep_sec
+    START WITH 5
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
--- ----------------------------
--- Foreign Key structure for table "users"
--- ----------------------------
-ALTER TABLE "users" ADD FOREIGN KEY ("plant_id") REFERENCES "plants" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "users" ADD FOREIGN KEY ("plant_id") REFERENCES "plants" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "users" ADD FOREIGN KEY ("user_group_id") REFERENCES "user_groups" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "users" ADD FOREIGN KEY ("user_department_id") REFERENCES "user_departments" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "users" ADD FOREIGN KEY ("user_department_id") REFERENCES "user_departments" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "users" ADD FOREIGN KEY ("user_group_id") REFERENCES "user_groups" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE obs_dep_sec OWNER TO postgres;
+
+--
+-- TOC entry 2213 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: obs_dep_sec; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE obs_dep_sec OWNED BY obs_departments.id;
+
+
+--
+-- TOC entry 192 (class 1259 OID 16434)
+-- Name: obs_fields; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE obs_fields (
+    id integer NOT NULL,
+    cat_id integer NOT NULL,
+    name json NOT NULL,
+    description json
+);
+
+
+ALTER TABLE obs_fields OWNER TO postgres;
+
+--
+-- TOC entry 184 (class 1259 OID 16403)
+-- Name: obs_fields_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE obs_fields_id_seq
+    START WITH 39
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE obs_fields_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2214 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: obs_fields_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE obs_fields_id_seq OWNED BY obs_fields.id;
+
+
+--
+-- TOC entry 193 (class 1259 OID 16441)
+-- Name: plants; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE plants (
+    id integer NOT NULL,
+    plant_code character varying(255) NOT NULL,
+    description character varying(255),
+    parent_plant_id integer
+);
+
+
+ALTER TABLE plants OWNER TO postgres;
+
+--
+-- TOC entry 185 (class 1259 OID 16405)
+-- Name: plants_sec; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE plants_sec
+    START WITH 5
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE plants_sec OWNER TO postgres;
+
+--
+-- TOC entry 2215 (class 0 OID 0)
+-- Dependencies: 185
+-- Name: plants_sec; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE plants_sec OWNED BY plants.id;
+
+
+--
+-- TOC entry 194 (class 1259 OID 16448)
+-- Name: user_departments; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE user_departments (
+    id integer NOT NULL,
+    name json NOT NULL,
+    plant_id integer NOT NULL
+);
+
+
+ALTER TABLE user_departments OWNER TO postgres;
+
+--
+-- TOC entry 186 (class 1259 OID 16407)
+-- Name: user_departments_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE user_departments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE user_departments_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2216 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: user_departments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE user_departments_id_seq OWNED BY user_departments.id;
+
+
+--
+-- TOC entry 195 (class 1259 OID 16455)
+-- Name: user_groups; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE user_groups (
+    id integer NOT NULL,
+    name character varying(35) NOT NULL,
+    cards_count integer DEFAULT 0 NOT NULL,
+    plant_id integer NOT NULL
+);
+
+
+ALTER TABLE user_groups OWNER TO postgres;
+
+--
+-- TOC entry 187 (class 1259 OID 16409)
+-- Name: user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE user_groups_id_seq
+    START WITH 10
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE user_groups_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2217 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE user_groups_id_seq OWNED BY user_groups.id;
+
+
+--
+-- TOC entry 198 (class 1259 OID 16689)
+-- Name: user_roles; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE user_roles (
+    id integer NOT NULL,
+    name character varying(128) NOT NULL
+);
+
+
+ALTER TABLE user_roles OWNER TO postgres;
+
+--
+-- TOC entry 197 (class 1259 OID 16687)
+-- Name: user_roles_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE user_roles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE user_roles_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2218 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: user_roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE user_roles_id_seq OWNED BY user_roles.id;
+
+
+--
+-- TOC entry 196 (class 1259 OID 16460)
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    first_name character varying(255) NOT NULL,
+    last_name character varying(255),
+    ad_account character varying(255) NOT NULL,
+    user_department_id integer NOT NULL,
+    user_group_id integer NOT NULL,
+    plant_id integer NOT NULL,
+    email character varying(255) NOT NULL,
+    role_id integer DEFAULT 3 NOT NULL,
+    passhash text NOT NULL
+);
+
+
+ALTER TABLE users OWNER TO postgres;
+
+--
+-- TOC entry 188 (class 1259 OID 16411)
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2219 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- TOC entry 2038 (class 2604 OID 16416)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cards ALTER COLUMN id SET DEFAULT nextval('cards_sec'::regclass);
+
+
+--
+-- TOC entry 2039 (class 2604 OID 16423)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY obs_categories ALTER COLUMN id SET DEFAULT nextval('obs_cat_id'::regclass);
+
+
+--
+-- TOC entry 2040 (class 2604 OID 16430)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY obs_departments ALTER COLUMN id SET DEFAULT nextval('obs_dep_sec'::regclass);
+
+
+--
+-- TOC entry 2041 (class 2604 OID 16437)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY obs_fields ALTER COLUMN id SET DEFAULT nextval('obs_fields_id_seq'::regclass);
+
+
+--
+-- TOC entry 2042 (class 2604 OID 16444)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY plants ALTER COLUMN id SET DEFAULT nextval('plants_sec'::regclass);
+
+
+--
+-- TOC entry 2043 (class 2604 OID 16451)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_departments ALTER COLUMN id SET DEFAULT nextval('user_departments_id_seq'::regclass);
+
+
+--
+-- TOC entry 2044 (class 2604 OID 16458)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_groups ALTER COLUMN id SET DEFAULT nextval('user_groups_id_seq'::regclass);
+
+
+--
+-- TOC entry 2048 (class 2604 OID 16692)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_roles ALTER COLUMN id SET DEFAULT nextval('user_roles_id_seq'::regclass);
+
+
+--
+-- TOC entry 2046 (class 2604 OID 16463)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- TOC entry 2050 (class 2606 OID 16470)
+-- Name: cards_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cards
+    ADD CONSTRAINT cards_id_key UNIQUE (id);
+
+
+--
+-- TOC entry 2052 (class 2606 OID 16472)
+-- Name: cards_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cards
+    ADD CONSTRAINT cards_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2054 (class 2606 OID 16474)
+-- Name: obs_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY obs_categories
+    ADD CONSTRAINT obs_categories_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2056 (class 2606 OID 16476)
+-- Name: obs_departments_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY obs_departments
+    ADD CONSTRAINT obs_departments_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2058 (class 2606 OID 16478)
+-- Name: obs_fields_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY obs_fields
+    ADD CONSTRAINT obs_fields_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2060 (class 2606 OID 16480)
+-- Name: plants_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY plants
+    ADD CONSTRAINT plants_id_key UNIQUE (id);
+
+
+--
+-- TOC entry 2062 (class 2606 OID 16482)
+-- Name: plants_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY plants
+    ADD CONSTRAINT plants_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2064 (class 2606 OID 16484)
+-- Name: user_departments_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_departments
+    ADD CONSTRAINT user_departments_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2068 (class 2606 OID 16686)
+-- Name: user_email; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT user_email UNIQUE (email);
+
+
+--
+-- TOC entry 2066 (class 2606 OID 16486)
+-- Name: user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_groups
+    ADD CONSTRAINT user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2072 (class 2606 OID 16694)
+-- Name: user_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_roles
+    ADD CONSTRAINT user_roles_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2070 (class 2606 OID 16488)
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2075 (class 2606 OID 16504)
+-- Name: cards_obs_department_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cards
+    ADD CONSTRAINT cards_obs_department_id_fkey FOREIGN KEY (obs_department_id) REFERENCES obs_departments(id);
+
+
+--
+-- TOC entry 2074 (class 2606 OID 16499)
+-- Name: cards_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cards
+    ADD CONSTRAINT cards_plant_id_fkey FOREIGN KEY (plant_id) REFERENCES plants(id);
+
+
+--
+-- TOC entry 2073 (class 2606 OID 16489)
+-- Name: cards_user_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cards
+    ADD CONSTRAINT cards_user_group_id_fkey FOREIGN KEY (user_group_id) REFERENCES user_groups(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2082 (class 2606 OID 16645)
+-- Name: fk8xv38p2bjm3f8yl8dmtqj9yac; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY plants
+    ADD CONSTRAINT fk8xv38p2bjm3f8yl8dmtqj9yac FOREIGN KEY (parent_plant_id) REFERENCES plants(id);
+
+
+--
+-- TOC entry 2076 (class 2606 OID 16519)
+-- Name: obs_categories_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY obs_categories
+    ADD CONSTRAINT obs_categories_plant_id_fkey FOREIGN KEY (plant_id) REFERENCES plants(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2077 (class 2606 OID 16529)
+-- Name: obs_departments_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY obs_departments
+    ADD CONSTRAINT obs_departments_plant_id_fkey FOREIGN KEY (plant_id) REFERENCES plants(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2078 (class 2606 OID 16539)
+-- Name: obs_fields_cat_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY obs_fields
+    ADD CONSTRAINT obs_fields_cat_id_fkey FOREIGN KEY (cat_id) REFERENCES obs_categories(id);
+
+
+--
+-- TOC entry 2081 (class 2606 OID 16559)
+-- Name: plants_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY plants
+    ADD CONSTRAINT plants_id_fkey FOREIGN KEY (id) REFERENCES plants(id);
+
+
+--
+-- TOC entry 2079 (class 2606 OID 16549)
+-- Name: plants_parent_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY plants
+    ADD CONSTRAINT plants_parent_plant_id_fkey FOREIGN KEY (parent_plant_id) REFERENCES plants(id);
+
+
+--
+-- TOC entry 2080 (class 2606 OID 16554)
+-- Name: plants_parent_plant_id_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY plants
+    ADD CONSTRAINT plants_parent_plant_id_fkey1 FOREIGN KEY (parent_plant_id) REFERENCES plants(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2083 (class 2606 OID 16564)
+-- Name: user_departments_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_departments
+    ADD CONSTRAINT user_departments_plant_id_fkey FOREIGN KEY (plant_id) REFERENCES plants(id);
+
+
+--
+-- TOC entry 2084 (class 2606 OID 16574)
+-- Name: user_groups_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_groups
+    ADD CONSTRAINT user_groups_plant_id_fkey FOREIGN KEY (plant_id) REFERENCES plants(id);
+
+
+--
+-- TOC entry 2088 (class 2606 OID 16704)
+-- Name: user_role_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT user_role_id_fkey FOREIGN KEY (role_id) REFERENCES user_roles(id);
+
+
+--
+-- TOC entry 2085 (class 2606 OID 16584)
+-- Name: users_plant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_plant_id_fkey FOREIGN KEY (plant_id) REFERENCES plants(id);
+
+
+--
+-- TOC entry 2087 (class 2606 OID 16599)
+-- Name: users_user_department_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_user_department_id_fkey FOREIGN KEY (user_department_id) REFERENCES user_departments(id);
+
+
+--
+-- TOC entry 2086 (class 2606 OID 16594)
+-- Name: users_user_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_user_group_id_fkey FOREIGN KEY (user_group_id) REFERENCES user_groups(id);
+
+
+--
+-- TOC entry 2209 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2016-04-05 15:57:53
+
+--
+-- PostgreSQL database dump complete
+--
+

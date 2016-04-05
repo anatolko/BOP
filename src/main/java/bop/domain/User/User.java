@@ -1,6 +1,8 @@
-package bop.domain;
+package bop.domain.user;
 
 
+
+import bop.domain.Plant;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -42,14 +44,19 @@ public class User implements Serializable {
     @ManyToOne
     @JoinColumn(name="plant_id")
     private Plant plant;
+    
+    @NotNull
+    @Column(name = "email")
+    private String email;
 
     @NotNull
-    @Column(name = "admin")
-    private Boolean admin;
-
+    @ManyToOne
+    @JoinColumn(name="role_id",referencedColumnName = "id")
+    private UserRole userRole;
+    
     @NotNull
-    @Column(name = "moderator")
-    private Boolean moderator;
+    @Column(name = "passhash")
+    private String passHash;
 
     public int getId() {
         return id;
@@ -107,19 +114,27 @@ public class User implements Serializable {
         this.plant = plant;
     }
 
-    public Boolean getAdmin() {
-        return admin;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Boolean getModerator() {
-        return moderator;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setModerator(Boolean moderator) {
-        this.moderator = moderator;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
+    public String getPassHash() {
+        return passHash;
+    }
+
+    public void setPassHash(String passHash) {
+        this.passHash = passHash;
     }
 }

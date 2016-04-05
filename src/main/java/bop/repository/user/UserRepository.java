@@ -1,6 +1,6 @@
-package bop.repository;
+package bop.repository.user;
 
-import bop.domain.User;
+import bop.domain.user.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
