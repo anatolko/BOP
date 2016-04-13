@@ -5,6 +5,7 @@
         .module('app.bop',
             ['pascalprecht.translate',
                 'ngCookies',
+                'ngAnimate',
                 'ui.bootstrap',
                 'ngResource',
                 'ui.router',

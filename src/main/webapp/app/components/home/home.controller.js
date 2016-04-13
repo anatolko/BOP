@@ -6,9 +6,11 @@
         .controller('HomeInfo', HomeInfo);
 
     HomeInfo.$inject =
-        ['$timeout','$scope', '$uibModal', '$http', 'Card','obsCategory','obsField','$translatePartialLoader'];
+        ['$timeout','$scope', '$uibModal', '$http', 'Card','obsCategory','obsField','$translatePartialLoader',
+            '$animate'];
 
-    function HomeInfo($timeout, $scope, $uibModal, $http, Card, obsCategory, obsField, $translatePartialLoader) {
+    function HomeInfo($timeout, $scope, $uibModal, $http, Card, obsCategory, obsField, $translatePartialLoader,
+                      $animate) {
         var vm = this;
         vm.user = [];
         vm.page = {};

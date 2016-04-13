@@ -4,6 +4,15 @@ body {
     padding-bottom: 60px;
 }
 
+.table {
+    margin-bottom: 0px;
+}
+
+.pagination {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
 .navbar-inverse{
     background-color: #00b3ee;
 }
@@ -69,3 +78,4 @@ body {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
