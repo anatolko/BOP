@@ -10,7 +10,7 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguratio
 
 // changing default configuration for our REST
 @Configuration
-public class MyRestRepositoryConfig extends RepositoryRestMvcConfiguration {
+public class RestRepositoryConfig extends RepositoryRestMvcConfiguration {
 
     @Override
     public RepositoryRestConfiguration config() {

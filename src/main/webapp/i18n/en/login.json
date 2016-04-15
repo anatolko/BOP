@@ -1,0 +1,16 @@
+{
+  "title": "Login Form",
+  "login": {
+    "form": {
+      "title": "Please sign in",
+      "email": "Email address",
+      "username": "User name",
+      "password": "Password",
+      "submitButton": "Sign in",
+      "rememberMe": "Remember me"
+    },
+    "messages": {
+      "error": "There was a problem logging in. Please try again."
+    }
+  }
+}
