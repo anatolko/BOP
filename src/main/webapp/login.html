@@ -15,7 +15,6 @@
     <link rel="stylesheet" type="text/css" href="assets\css\style.css"/>
     <link rel="stylesheet" type="text/css" href="app\components\login\login.style.css"/>
 
-
 </head>
 <body ng-controller="Index as index">
 
@@ -34,14 +33,45 @@
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/reports" translate="global.menu.reports">REPORTS</a></li>
-                <li><a href="#/help" translate="global.menu.help">Help</a></li>
+                <li><a href="#/help"><i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp; {{'global.menu.help' | translate}}</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<main ui-view></main>
+<main ng-controller="Login">
+    <div class="container">
+        <div class="alert alert-danger" ng-show="error" translate="login.messages.error">
+            There was a problem logging in. Please try again.
+        </div>
+        <form class="form-login" ng-submit="login()">
+            <h2 class="form-login-heading" translate="login.form.title">Please sign in</h2>
+
+            <label for="inputEmail" class="sr-only" translate="login.form.email">Email address</label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                <input type="email" id="inputEmail" class="form-control"
+                       ng-attr-placeholder="{{'login.form.email' | translate}}" required autofocus>
+            </div>
+
+            <label for="inputPassword" class="sr-only" translate="login.form.password">Password</label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                <input type="password" id="inputPassword" class="form-control"
+                       ng-attr-placeholder="{{'login.form.password' | translate}}" required>
+            </div>    
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> {{'login.form.rememberMe' | translate}}
+                </label>
+            </div>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit" translate="login.form.submitButton">Sign in
+            </button>
+        </form>
+    </div>
+</main>
 
 <nav class="navbar navbar-default navbar-fixed-bottom ">
     <div class="container-fluid ">

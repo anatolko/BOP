@@ -43,13 +43,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers(HttpMethod.OPTIONS, "/**")
+                .antMatchers("/app/**/*.{js,html}")
+                .antMatchers("/assets/**")
+                .antMatchers("/i18n/**");
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .csrf()
         .and()
             .formLogin()
             .loginProcessingUrl("/api/authentication")
-            .loginPage("/index.html#/login")
+            .loginPage("/login.html")
             .successHandler(ajaxAuthenticationSuccessHandler)
             .failureHandler(ajaxAuthenticationFailureHandler)
             .usernameParameter("bop_username")
@@ -57,9 +66,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .permitAll()
         .and()
             .authorizeRequests()
-            .antMatchers("index.html").permitAll()
-            .antMatchers("app/login/login.view.html").permitAll()
-            .antMatchers("app/**/*").permitAll()
             .anyRequest().authenticated();
     }
 }
