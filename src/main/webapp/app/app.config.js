@@ -7,9 +7,9 @@
         .config(configure);
 
     configure.$inject =
-        ['$translateProvider', 'tmhDynamicLocaleProvider', '$httpProvider'];
+        ['$translateProvider', 'tmhDynamicLocaleProvider', '$httpProvider', '$locationProvider'];
 
-    function configure($translateProvider, tmhDynamicLocaleProvider, $httpProvider) {
+    function configure($translateProvider, tmhDynamicLocaleProvider, $httpProvider, $locationProvider) {
         $translateProvider.useLoader('$translatePartialLoader', {
             urlTemplate: 'i18n/{lang}/{part}.json'
         });
@@ -24,5 +24,11 @@
         tmhDynamicLocaleProvider.storageKey('NG_TRANSLATE_LANG_KEY');
 
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+        // enable CSRF
+        $httpProvider.defaults.xsrfCookieName = 'CSRF-TOKEN';
+        $httpProvider.defaults.xsrfHeaderName = 'X-CSRF-TOKEN';
+
+        $locationProvider.html5Mode(true);
     }
 })();

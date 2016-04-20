@@ -26,7 +26,8 @@
             .state('login', {
                 url: '/login',
                 templateUrl: 'app/components/login/login.view.html',
-                controller: 'Login'
+                controller: 'Login',
+                controllerAs: 'login'
             });
     }
 })();

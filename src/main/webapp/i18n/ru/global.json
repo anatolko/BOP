@@ -2,7 +2,8 @@
   "global": {
     "menu": {
       "reports": "Отчеты",
-      "help": "Помощь"
+      "help": "Помощь",
+      "logout": "Выход"
     },
 
     "search": "Поиск"

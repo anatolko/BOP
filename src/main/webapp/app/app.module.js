@@ -15,15 +15,37 @@
         .controller('Index', Index)
         .run(runFunc);
 
-    Index.$inject = ['$translate', 'tmhDynamicLocale', '$translatePartialLoader'];
+    Index.$inject = ['$translate', 'tmhDynamicLocale', '$translatePartialLoader', '$scope', 'Auth'];
     runFunc.$inject = ['$rootScope', '$translate'];
 
-    function Index($translate, tmhDynamicLocale, $translatePartialLoader) {
+    function Index($translate, tmhDynamicLocale, $translatePartialLoader, $scope, Auth) {
         var vm = this;
 
         $translatePartialLoader.addPart('global');
 
         vm.lang = $translate.use();
+
+        vm.account = null;
+        vm.isAuthenticated = null;
+
+        $scope.$on('authenticationSuccess', function () {
+            getAccount();
+        });
+
+        $scope.$on('logoutSuccess', function () {
+            getAccount();
+        });
+
+        getAccount();
+
+        function getAccount() {
+            Auth.getUserInfo().then(function (account) {
+                vm.account = account;
+                vm.isAuthenticated = true;
+            }).catch(function () {
+                vm.isAuthenticated = false;
+            });
+        }
 
         vm.changeLanguage = function (langKey) {
             $translate.use(langKey);

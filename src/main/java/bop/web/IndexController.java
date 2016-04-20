@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
-    @RequestMapping("/")
+    @RequestMapping({"/home", "/login"})
     public String index() {
-        return "redirect:/index.html";
+        return "forward:/index.html";
     }
 }

@@ -1,6 +1,7 @@
 <!doctype html>
 <html ng-app="app.bop">
 <head>
+    <base href="/">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,13 +30,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#/home" translate="title">BOP</a>
+            <a class="navbar-brand" href="/home" translate="title">BOP</a>
         </div>
 
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="navbar" class="navbar-collapse collapse" ng-controller="Login as login">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/reports" translate="global.menu.reports">REPORTS</a></li>
-                <li><a href="#/help" translate="global.menu.help">Help</a></li>
+                <li ng-show="index.isAuthenticated"><a href="/reports"><i class="fa fa-lg fa-file-text-o" aria-hidden="true"></i>&nbsp; {{'global.menu.reports' | translate}}</a></li>
+                <li><a href="/help"><i class="fa fa-lg fa-question-circle" aria-hidden="true"></i>&nbsp; {{'global.menu.help' | translate}}</a></li>
+                <li ng-show="index.isAuthenticated"><a ng-click="login.logout()" href="#"><i class="fa fa-lg fa-sign-out" aria-hidden="true"></i>&nbsp; {{'global.menu.logout' | translate}}</a></li>
             </ul>
         </div>
     </div>
@@ -92,6 +94,7 @@
 <script type="text/javascript" src="app\shared\services\obs-category.service.js"></script>
 <script type="text/javascript" src="app\shared\services\obs-field.service.js"></script>
 <script type="text/javascript" src="app\shared\services\card.service.js"></script>
+<script type="text/javascript" src="app\shared\services\auth.service.js"></script>
 
 
 </body>

@@ -2,7 +2,8 @@
   "global": {
     "menu": {
       "reports": "Reports",
-      "help": "Help"
+      "help": "Help",
+      "logout": "Sign out"
     },
 
     "search": "Search"

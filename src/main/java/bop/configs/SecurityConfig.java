@@ -2,8 +2,9 @@ package bop.configs;
 
 import bop.security.AjaxAuthenticationFailureHandler;
 import bop.security.AjaxAuthenticationSuccessHandler;
+import bop.security.AjaxLogoutSuccessHandler;
+import bop.web.filter.CsrfCookieGeneratorFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CsrfFilter;
 
 
 @Configuration
@@ -29,6 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Autowired
     AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
+    
+    @Autowired
+    AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler;
     
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -45,10 +50,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers(HttpMethod.OPTIONS, "/**")
-                .antMatchers("/app/**/*.{js,html}")
-                .antMatchers("/assets/**")
-                .antMatchers("/i18n/**");
+            .antMatchers(HttpMethod.OPTIONS, "/**")
+            .antMatchers("/app/**/*.{js,html}")
+            .antMatchers("/assets/**")
+            .antMatchers("/i18n/**");
     }
 
     @Override
@@ -58,14 +63,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
             .formLogin()
             .loginProcessingUrl("/api/authentication")
-            .loginPage("/login.html")
+            .loginPage("/login")
             .successHandler(ajaxAuthenticationSuccessHandler)
             .failureHandler(ajaxAuthenticationFailureHandler)
-            .usernameParameter("bop_username")
+            .usernameParameter("bop_email")
             .passwordParameter("bop_password")
             .permitAll()
         .and()
+            .logout()
+            .logoutUrl("/api/logout")
+            .logoutSuccessHandler(ajaxLogoutSuccessHandler)
+            .deleteCookies("JSESSIONID", "CSRF-TOKEN")
+            .permitAll()
+        .and()
             .authorizeRequests()
-            .anyRequest().authenticated();
+            .antMatchers("/api/authenticate").permitAll()
+            .antMatchers("/api/account/info").permitAll()
+            .anyRequest().authenticated()
+        .and()
+            .addFilterAfter(new CsrfCookieGeneratorFilter(), CsrfFilter.class);
     }
 }

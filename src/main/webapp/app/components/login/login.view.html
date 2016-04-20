@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="alert alert-danger" ng-show="login.authenticationError" translate="login.messages.error">
+        There was a problem logging in. Please try again.
+    </div>
+    <form class="form-login" ng-submit="login.login()">
+        <h2 class="form-login-heading" translate="login.form.title">Please sign in</h2>
+
+        <label for="inputEmail" class="sr-only" translate="login.form.email">Email address</label>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+            <input ng-model="login.email" type="email" id="inputEmail" class="form-control"
+                   ng-attr-placeholder="{{'login.form.email' | translate}}" required autofocus>
+        </div>
+
+        <label for="inputPassword" class="sr-only" translate="login.form.password">Password</label>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+            <input ng-model="login.password" type="password" id="inputPassword" class="form-control"
+                   ng-attr-placeholder="{{'login.form.password' | translate}}" required>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> {{'login.form.rememberMe' | translate}}
+            </label>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" translate="login.form.submitButton">Sign in
+        </button>
+    </form>
+</div>
