@@ -4,9 +4,9 @@
     <div class="span3 well">
         <center>
             <h3>{{index.account.firstName}} {{index.account.lastName}}</h3>
-            <em>{{home.user.department}}</em>, <em>{{home.user.site}}</em>
-            <h5 class="text-success">{{'home.userInfo.cardsForWeek' | translate}}1 / 1</h5>
-            <h5 class="text-info">{{'home.userInfo.cardsTotal' | translate}}20</h5>
+            <em>{{index.account.userDepartment.name[index.lang]}}</em>, <em>{{index.account.plant.plantCode}}</em>
+            <h5 class="text-danger">{{'home.userInfo.cardsForWeek' | translate}}0 / {{index.account.userGroup.cardsCount}}</h5>
+            <h5 class="text-info">{{'home.userInfo.cardsTotal' | translate}}{{home.page.totalElements}}</h5>
         </center>
     </div>
 

@@ -12,7 +12,6 @@
     function HomeInfo($timeout, $scope, $uibModal, $http, Card, obsCategory, obsField, $translatePartialLoader,
                       $animate) {
         var vm = this;
-        vm.user = [];
         vm.page = {};
         vm.cardsPerPage = 5;
 
@@ -71,10 +70,6 @@
             }
             return resultArr;
         };
-
-        $http.get('./assets/data/test/test-user.json').success(function (data) {
-            vm.user = data;
-        });
 
         /*ui.bootstrap.modal*/
         /**
