@@ -4,19 +4,19 @@
 
     var LOGIN_URL = 'api/authentication';
     var LOGOUT_URL = 'api/logout';
-    var ACCOUNT_INFO_URL = 'api/account/info';
+    var CURRENT_ACCOUNT_INFO_URL = 'api/account/info';
 
     angular
         .module('app.bop')
         .service('Auth', Auth);
 
-    Auth.$inject = ['$http', '$q'];
+    Auth.$inject = ['$http', '$q', 'SpringDataRestAdapter'];
 
-    function Auth($http, $q) {
+    function Auth($http, $q, SpringDataRestAdapter) {
         return ({
             login: login,
             logout: logout,
-            getUserInfo: getUserInfo
+            getCurrentUserInfo: getCurrentUserInfo
         });
 
         function login(credentials) {
@@ -43,13 +43,13 @@
             return (request.then(handleSuccess, handleError));
         }
 
-        function getUserInfo() {
+        function getCurrentUserInfo() {
             var request = $http({
                 method: 'get',
-                url: ACCOUNT_INFO_URL
+                url: CURRENT_ACCOUNT_INFO_URL
             });
 
-            return (request.then(handleSuccess, handleError));
+            return (request.then(handleHateoasSuccess, handleError));
         }
 
         // I transform the error response, unwrapping the application dta from
@@ -69,6 +69,10 @@
         // from the API response payload.
         function handleSuccess(response) {
             return response.data;
+        }
+
+        function handleHateoasSuccess(response) {
+            return SpringDataRestAdapter.process(response, '_allLinks');
         }
     }
 })();

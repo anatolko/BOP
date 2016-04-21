@@ -6,11 +6,9 @@
         .controller('HomeInfo', HomeInfo);
 
     HomeInfo.$inject =
-        ['$timeout','$scope', '$uibModal', '$http', 'Card','obsCategory','obsField','$translatePartialLoader',
-            '$animate'];
+        ['$timeout','$scope', '$uibModal', 'Card','obsCategory','obsField','$translatePartialLoader'];
 
-    function HomeInfo($timeout, $scope, $uibModal, $http, Card, obsCategory, obsField, $translatePartialLoader,
-                      $animate) {
+    function HomeInfo($timeout, $scope, $uibModal, Card, obsCategory, obsField, $translatePartialLoader) {
         var vm = this;
         vm.page = {};
         vm.cardsPerPage = 5;
@@ -81,7 +79,12 @@
                 templateUrl: 'app/components/card/card.view.html',
                 controller: 'CardForm as card',
                 size: size,
-                backdrop: 'static'
+                backdrop: 'static',
+                resolve: {
+                    param: {
+                        accountInfo: $scope.authenticatedAccount
+                    }
+                }
             });
 
             // update table with cards after modal closing

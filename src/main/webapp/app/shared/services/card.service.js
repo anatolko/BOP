@@ -2,6 +2,8 @@
 (function () {
     'use strict';
     var API_URL = 'api/cards';
+    var SEARCH_PREFIX = '/search';
+    var COUNT_CARDS_BY_ID_URL = '/countByUserId';
 
     angular
         .module('app.bop')
@@ -15,13 +17,14 @@
         return ({
             addCard: addCard,
             getCard: getCard,
-            getAllCards: getAllCards
+            getAllCards: getAllCards,
+            getCardsCountByUserId: getCardsCountByUserId
         });
 
         function addCard(
             obsDate,
             profileId,
-            userDeparment,
+            userDepartment,
             obsDepartment,
             plant,
             selectedCategories,
@@ -35,8 +38,8 @@
                 data: {
                     cardDate: new Date(),
                     obsDate: obsDate,
-                    adAccount: profileId,
-                    userDepartment: userDeparment,
+                    user: profileId,
+                    userDepartment: userDepartment,
                     obsDepartment: obsDepartment,
                     plant: plant,
                     selectedCategories: selectedCategories,
@@ -60,7 +63,7 @@
                 url: API_URL + '/' + id
             });
 
-            return (request.then(handleSuccess, handleError));
+            return (request.then(handleHateoasSuccess, handleError));
         }
 
         /**
@@ -78,6 +81,18 @@
                     size: size,
                     page: page,
                     sort: sort
+                }
+            });
+
+            return (request.then(handleHateoasSuccess, handleError));
+        }
+
+        function getCardsCountByUserId(id) {
+            var requerst = $http({
+                method: 'get',
+                url: API_URL + SEARCH_PREFIX + COUNT_CARDS_BY_ID_URL,
+                params: {
+                    user_id: id
                 }
             });
 
@@ -100,6 +115,10 @@
         // I transform the successful response, unwrapping the application data
         // from the API response payload.
         function handleSuccess(response) {
+            return response.data;
+        }
+
+        function handleHateoasSuccess(response) {
             // getting data from HATEOAS links
             return SpringDataRestAdapter.process(response, 'obsDepartment');
         }

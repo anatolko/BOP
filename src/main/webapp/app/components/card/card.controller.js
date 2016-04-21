@@ -7,9 +7,9 @@
         .controller('CardForm', CardForm);
 
     CardForm.$inject =
-        ['$translate','obsDepartment','obsCategory','$uibModalInstance','Card', '$translatePartialLoader'];
+        ['$translate', '$scope', 'obsDepartment','obsCategory','$uibModalInstance','Card', '$translatePartialLoader', 'param'];
 
-    function CardForm($translate, obsDepartment, obsCategory, $uibModalInstance, Card, $translatePartialLoader) {
+    function CardForm($translate, $scope, obsDepartment, obsCategory, $uibModalInstance, Card, $translatePartialLoader, param) {
         var vm = this;
 
         $translatePartialLoader.addPart('card');
@@ -22,6 +22,7 @@
         vm.obsDepartments = [];
         vm.obsDate = new Date();
         vm.obsTime = new Date();
+        vm.accountInfo = param.accountInfo;
 
         // getting current language
         vm.lang = $translate.use();
@@ -77,8 +78,8 @@
                         vm.obsTime.getMinutes(),
                         vm.obsTime.getSeconds()
                     ),
-                    'ayashkin',
-                    'HR',
+                    vm.accountInfo._links.self.href,
+                    vm.accountInfo.userGroup._links.self.href,
                     vm.selectedDep._links.self.href,
                     vm.plant.link.href,
                     JSON.stringify({categories: vm.checkedCats}),

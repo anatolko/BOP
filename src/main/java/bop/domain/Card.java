@@ -1,6 +1,8 @@
 package bop.domain;
 
 
+import bop.domain.user.User;
+import bop.domain.user.UserDepartment;
 import bop.domain.user.UserGroup;
 import bop.domain.usertypes.JsonMapType;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -37,12 +39,14 @@ public class Card implements Serializable {
     private Date obsDate;
 
     @NotNull
-    @Column(name = "ad_account")
-    private String adAccount;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
     @NotNull
-    @Column(name = "user_department")
-    private String userDepartment;
+    @ManyToOne
+    @JoinColumn(name="user_department_id")
+    private UserDepartment userDepartment;
 
     @NotNull
     @ManyToOne
@@ -98,19 +102,19 @@ public class Card implements Serializable {
         this.obsDate = obsDate;
     }
 
-    public String getAdAccount() {
-        return adAccount;
+    public User getUser() {
+        return user;
     }
 
-    public void setAdAccount(String adAccount) {
-        this.adAccount = adAccount;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getUserDepartment() {
+    public UserDepartment getUserDepartment() {
         return userDepartment;
     }
 
-    public void setUserDepartment(String userDepartment) {
+    public void setUserDepartment(UserDepartment userDepartment) {
         this.userDepartment = userDepartment;
     }
 

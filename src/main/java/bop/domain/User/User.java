@@ -3,6 +3,7 @@ package bop.domain.user;
 
 
 import bop.domain.Plant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -56,6 +57,7 @@ public class User implements Serializable {
     
     @NotNull
     @Column(name = "passhash")
+    @JsonIgnore
     private String passHash;
 
     public int getId() {

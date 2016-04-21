@@ -3,9 +3,9 @@
 <div>
     <div class="span3 well">
         <center>
-            <h3>{{index.account.firstName}} {{index.account.lastName}}</h3>
-            <em>{{index.account.userDepartment.name[index.lang]}}</em>, <em>{{index.account.plant.plantCode}}</em>
-            <h5 class="text-danger">{{'home.userInfo.cardsForWeek' | translate}}0 / {{index.account.userGroup.cardsCount}}</h5>
+            <h3>{{authenticatedAccount.firstName}} {{authenticatedAccount.lastName}}</h3>
+            <em>{{authenticatedAccount.userDepartment.name[index.lang]}}</em>, <em>{{authenticatedAccount.plant.plantCode}}</em>
+            <h5 class="text-danger">{{'home.userInfo.cardsForWeek' | translate}}0 / {{authenticatedAccount.userGroup.cardsCount}}</h5>
             <h5 class="text-info">{{'home.userInfo.cardsTotal' | translate}}{{home.page.totalElements}}</h5>
         </center>
     </div>

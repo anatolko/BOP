@@ -25,7 +25,7 @@
 
         vm.lang = $translate.use();
 
-        vm.account = null;
+        $scope.authenticatedAccount = null;
         vm.isAuthenticated = null;
 
         $scope.$on('authenticationSuccess', function () {
@@ -39,13 +39,14 @@
         getAccount();
 
         function getAccount() {
-            Auth.getUserInfo().then(function (account) {
-                vm.account = account;
+            Auth.getCurrentUserInfo().then(function (account) {
+                $scope.authenticatedAccount = account;
                 vm.isAuthenticated = true;
             }).catch(function () {
                 vm.isAuthenticated = false;
             });
         }
+
 
         vm.changeLanguage = function (langKey) {
             $translate.use(langKey);
