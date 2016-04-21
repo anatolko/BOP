@@ -61,6 +61,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .csrf()
         .and()
+            .rememberMe()
+            .rememberMeParameter("remember-me")
+            .key("0b9ee27536ed9baf24daf1c01c4c28c4c3b71ee3")
+            .tokenValiditySeconds(60 * 60 * 24 * 31) // 31 day
+        .and()
             .formLogin()
             .loginProcessingUrl("/api/authentication")
             .loginPage("/login")
@@ -75,6 +80,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .logoutSuccessHandler(ajaxLogoutSuccessHandler)
             .deleteCookies("JSESSIONID", "CSRF-TOKEN")
             .permitAll()
+        .and()
+            .headers()
+            .frameOptions().disable()
         .and()
             .authorizeRequests()
             .antMatchers("/api/authenticate").permitAll()

@@ -16,6 +16,7 @@
         vm.authenticationError = false;
         vm.email = null;
         vm.password = null;
+        vm.rememberMe = true;
 
         vm.login = login;
         vm.logout = logout;
@@ -23,7 +24,8 @@
         function login() {
             Auth.login({
                 email: vm.email,
-                password: vm.password
+                password: vm.password,
+                rememberMe: vm.rememberMe
             }).then(function () {
                 vm.authenticationError = false;
                 $location.url('/');

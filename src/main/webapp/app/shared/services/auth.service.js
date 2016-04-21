@@ -23,8 +23,9 @@
             var request = $http({
                 method: 'post',
                 url: LOGIN_URL,
-                data: 'bop_email=' + encodeURIComponent(credentials.email)
-                        + '&bop_password=' + encodeURIComponent(credentials.password),
+                data: 'bop_email=' + encodeURIComponent(credentials.email) +
+                        '&bop_password=' + encodeURIComponent(credentials.password) +
+                        '&remember-me=' + credentials.rememberMe,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
