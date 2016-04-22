@@ -6,10 +6,11 @@
         .module('app.bop')
         .controller('CardForm', CardForm);
 
-    CardForm.$inject =
-        ['$translate', '$scope', 'obsDepartment','obsCategory','$uibModalInstance','Card', '$translatePartialLoader', 'param'];
+    CardForm.$inject = ['$translate', '$scope', 'obsDepartment', 'obsCategory','$uibModalInstance','Card',
+        '$translatePartialLoader', 'DateUtil', 'param'];
 
-    function CardForm($translate, $scope, obsDepartment, obsCategory, $uibModalInstance, Card, $translatePartialLoader, param) {
+    function CardForm($translate, $scope, obsDepartment, obsCategory, $uibModalInstance, Card, $translatePartialLoader,
+                      DateUtil, param) {
         var vm = this;
 
         $translatePartialLoader.addPart('card');
@@ -29,7 +30,7 @@
 
         // settings for calendar
         vm.maxDay = new Date();
-        vm.minDay = getMonday(vm.maxDay);
+        vm.minDay = DateUtil.getMondayDate(vm.maxDay);
 
         // form button functions
         vm.ok = ok;
@@ -93,14 +94,6 @@
 
         function cancel() {
             $uibModalInstance.dismiss('cancel');
-        }
-
-        function getMonday(d) {
-            d = new Date(d);
-            var day = d.getDay();
-            var diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
-
-            return new Date(d.setDate(diff));
         }
     }
 })();

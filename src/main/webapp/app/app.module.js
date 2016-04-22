@@ -36,7 +36,15 @@
             getAccount();
         });
 
-        getAccount();
+        // when page loading cheking user authentication
+        Auth.isAuthenticated().then(function (authName) {
+            if (authName.length > 0) {
+                // if user authenticated then we getting user info
+                getAccount();
+            } else {
+                vm.isAuthenticated = false;
+            }
+        });
 
         function getAccount() {
             Auth.getCurrentUserInfo().then(function (account) {
@@ -46,7 +54,6 @@
                 vm.isAuthenticated = false;
             });
         }
-
 
         vm.changeLanguage = function (langKey) {
             $translate.use(langKey);

@@ -2,9 +2,9 @@
 (function () {
     'use strict';
 
+    var API_URL = 'api/account';
     var LOGIN_URL = 'api/authentication';
     var LOGOUT_URL = 'api/logout';
-    var CURRENT_ACCOUNT_INFO_URL = 'api/account/info';
 
     angular
         .module('app.bop')
@@ -16,7 +16,8 @@
         return ({
             login: login,
             logout: logout,
-            getCurrentUserInfo: getCurrentUserInfo
+            getCurrentUserInfo: getCurrentUserInfo,
+            isAuthenticated: isAuthenticated
         });
 
         function login(credentials) {
@@ -46,10 +47,19 @@
         function getCurrentUserInfo() {
             var request = $http({
                 method: 'get',
-                url: CURRENT_ACCOUNT_INFO_URL
+                url: API_URL + '/info'
             });
 
             return (request.then(handleHateoasSuccess, handleError));
+        }
+
+        function isAuthenticated() {
+            var request = $http({
+                method: 'get',
+                url: API_URL + '/authenticate'
+            });
+
+            return (request.then(handleSuccess, handleError));
         }
 
         // I transform the error response, unwrapping the application dta from

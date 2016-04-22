@@ -2,8 +2,7 @@
 (function () {
     'use strict';
     var API_URL = 'api/cards';
-    var SEARCH_PREFIX = '/search';
-    var COUNT_CARDS_BY_ID_URL = '/countByUserId';
+    var API_URL_SEARCH = API_URL + '/search';
 
     angular
         .module('app.bop')
@@ -18,7 +17,8 @@
             addCard: addCard,
             getCard: getCard,
             getAllCards: getAllCards,
-            getCardsCountByUserId: getCardsCountByUserId
+            getAllCardsByUserId: getAllCardsByUserId,
+            getCountOfCardsForUserInPeriod: getCountOfCardsForUserInPeriod
         });
 
         function addCard(
@@ -87,15 +87,35 @@
             return (request.then(handleHateoasSuccess, handleError));
         }
 
-        function getCardsCountByUserId(id) {
-            var requerst = $http({
+        /**
+         * returns all BOP cards for user
+         * @param id user id
+         * @returns promise with request
+         */
+        function getAllCardsByUserId(id, size, page, sort) {
+            var request = $http({
                 method: 'get',
-                url: API_URL + SEARCH_PREFIX + COUNT_CARDS_BY_ID_URL,
+                url: API_URL_SEARCH + '/findAllByUserId',
                 params: {
-                    user_id: id
+                    userId: id,
+                    size: size,
+                    page: page,
+                    sort: sort
                 }
             });
+            return (request.then(handleHateoasSuccess, handleError));
+        }
 
+        function getCountOfCardsForUserInPeriod(userId, startDate, endDate) {
+            var request = $http({
+                method: 'get',
+                url: API_URL_SEARCH + '/countByUserIdAndCardDateBetween',
+                params: {
+                    userId: userId,
+                    startDate: startDate,
+                    endDate: endDate
+                }
+            });
             return (request.then(handleSuccess, handleError));
         }
 

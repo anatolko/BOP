@@ -11,11 +11,13 @@ import org.springframework.data.rest.webmvc.BasePathAwareController;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
@@ -35,13 +37,12 @@ public class AccountResource {
     EntityLinks entityLinks;
 
     /**
-     * returns info about current authenticated account 
+     * GET /info : get information about current authenticated account 
      * 
      * @return current authenticated account info in HATEOAS format
      */
     @RequestMapping(value = "/info",
                     method = RequestMethod.GET)
-    @ResponseBody
     public ResponseEntity<Resource<User>> getCurrentAccountInfo() {
         return Optional.ofNullable(userAccountService.getCurrentUser())
                 .map(user -> {
@@ -53,5 +54,19 @@ public class AccountResource {
                     return new ResponseEntity<>(resource, HttpStatus.OK);
                 } )
                 .orElse(new ResponseEntity<Resource<User>>(HttpStatus.UNAUTHORIZED));
+    }
+
+    /**
+     * GET  /authenticate : check if the user is authenticated, and return its login.
+     *
+     * @param request the HTTP request
+     * @return the login if the user is authenticated
+     */
+    @RequestMapping(value = "/authenticate",
+            method = RequestMethod.GET)
+    @ResponseBody
+    public String isAuthenticated(HttpServletRequest request) {
+        log.debug("REST request to check if the current user is authenticated");
+        return request.getRemoteUser();
     }
 }

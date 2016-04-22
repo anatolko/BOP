@@ -5,8 +5,12 @@
         <center>
             <h3>{{authenticatedAccount.firstName}} {{authenticatedAccount.lastName}}</h3>
             <em>{{authenticatedAccount.userDepartment.name[index.lang]}}</em>, <em>{{authenticatedAccount.plant.plantCode}}</em>
-            <h5 class="text-danger">{{'home.userInfo.cardsForWeek' | translate}}0 / {{authenticatedAccount.userGroup.cardsCount}}</h5>
-            <h5 class="text-info">{{'home.userInfo.cardsTotal' | translate}}{{home.page.totalElements}}</h5>
+            <h5 ng-class="home.cadsForWeek >= authenticatedAccount.userGroup.cardsCount ? 'text-success' : 'text-danger'">
+                {{'home.userInfo.cardsForWeek' | translate}}{{home.cadsForWeek}} / {{authenticatedAccount.userGroup.cardsCount}}
+            </h5>
+            <h5 class="text-info">
+                {{'home.userInfo.cardsTotal' | translate}}{{home.page.totalElements}}
+            </h5>
         </center>
     </div>
 
@@ -35,22 +39,25 @@
                         <th translate="home.table.headers.obsComment">Comment</th>
                     </tr>
                 </thead>
-                <tfoot>
-                <tr>
-                    <td colspan="6" style="text-align: center;">
-                        <uib-pagination boundary-links="true"
-                                    total-items="home.page.totalElements"
-                                    num-pages="home.page.totalPages"
-                                    items-per-page = "home.page.size"
-                                    ng-model="currentPage"
-                                    class="pagination-sm"
-                                    previous-text="&lsaquo;"
-                                    next-text="&rsaquo;"
-                                    first-text="&laquo;"
-                                    last-text="&raquo;">
-                        </uib-pagination>
-                    </td>
-                </tr>
+                <tfoot ng-show="home.page.totalPages > 1">
+                    <tr>
+                        <td colspan="6" style="text-align: center;">
+                            <uib-pagination boundary-links = "true"
+                                            total-items="home.page.totalElements"
+                                            num-pages="home.page.totalPages"
+                                            items-per-page = "home.page.size"
+                                            max-size = "home.maxPagerSize" 
+                                            boundary-link-numbers = "true"
+                                            rotate = "true"
+                                            ng-model="currentPage"
+                                            class="pagination-sm"
+                                            previous-text="&lsaquo;"
+                                            next-text="&rsaquo;"
+                                            first-text="&laquo;"
+                                            last-text="&raquo;">
+                            </uib-pagination>
+                        </td>
+                    </tr>
                 </tfoot>
                 <tbody>
                 <tr ng-repeat="card in home.cards">

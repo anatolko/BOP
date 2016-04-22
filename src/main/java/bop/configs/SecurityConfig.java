@@ -87,6 +87,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/api/authenticate").permitAll()
             .antMatchers("/api/account/info").permitAll()
+            .antMatchers("/api/account/authenticate").permitAll()
             .anyRequest().authenticated()
         .and()
             .addFilterAfter(new CsrfCookieGeneratorFilter(), CsrfFilter.class);

@@ -6,12 +6,14 @@
         .controller('HomeInfo', HomeInfo);
 
     HomeInfo.$inject =
-        ['$timeout','$scope', '$uibModal', 'Card','obsCategory','obsField','$translatePartialLoader'];
+        ['$timeout','$scope', '$uibModal', 'Card','obsCategory','obsField','$translatePartialLoader', 'DateUtil'];
 
-    function HomeInfo($timeout, $scope, $uibModal, Card, obsCategory, obsField, $translatePartialLoader) {
+    function HomeInfo($timeout, $scope, $uibModal, Card, obsCategory, obsField, $translatePartialLoader, DateUtil) {
         var vm = this;
+        vm.cadsForWeek = 0;
         vm.page = {};
         vm.cardsPerPage = 5;
+        vm.maxPagerSize = 10;
 
         // variable for table sorting
         vm.sort = {
@@ -23,16 +25,33 @@
         $translatePartialLoader.addPart('home');
 
         // getting cards for table
-        function getAllCards() {
-            Card.getAllCards(vm.cardsPerPage, $scope.currentPage - 1, (vm.sort.sortingOrder + ',' + vm.sort.order))
-                .then(function (data) {
-                    vm.cards = data._embeddedItems;
-                    vm.page = data.page;
-                });
+        function getAllCardsForCurrentUser() {
+            if ($scope.authenticatedAccount !== null) {
+                Card.getAllCardsByUserId($scope.authenticatedAccount.id,
+                    vm.cardsPerPage, $scope.currentPage - 1, (vm.sort.sortingOrder + ',' + vm.sort.order))
+                    .then(function (data) {
+                        vm.cards = data._embeddedItems;
+                        vm.page = data.page;
+                    });
+            }
         }
 
-        $scope.$watch('currentPage', function () {
-            getAllCards();
+        function getUserCardsForWeek() {
+            if ($scope.authenticatedAccount !== null) {
+                var mondayDate = DateUtil.getStartOfDate(DateUtil.getMondayDate(new Date())).toString();
+                var sundayDate = DateUtil.getEndOfDate(DateUtil.getSundayDate(new Date())).toString();
+                Card.getCountOfCardsForUserInPeriod($scope.authenticatedAccount.id,
+                    mondayDate,
+                    sundayDate)
+                    .then(function (data) {
+                        vm.cadsForWeek = data;
+                    });
+            }
+        }
+
+        $scope.$watchGroup(['currentPage', 'authenticatedAccount'], function (newVal, oldVal) {
+            getAllCardsForCurrentUser();
+            getUserCardsForWeek();
         });
 
         /**
@@ -90,7 +109,8 @@
             // update table with cards after modal closing
             modalInstance.result.then(function () {
                 $timeout(function () {
-                    getAllCards();
+                    getAllCardsForCurrentUser();
+                    getUserCardsForWeek();
                 });
             });
         };
