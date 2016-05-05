@@ -29,6 +29,6 @@ public class UserAccountService {
     
     @Transactional(readOnly = true)
     public User getCurrentUser(){
-        return userRepository.findOneByEmail(SecurityUtils.getCurrentUserLogin()).get();
+        return userRepository.findOneByEmail(SecurityUtils.getCurrentUserLogin()).orElse(null);
     }
 }
