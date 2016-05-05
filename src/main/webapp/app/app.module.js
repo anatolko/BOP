@@ -25,41 +25,50 @@
 
         vm.lang = $translate.use();
 
+        vm.changeLanguage = function (langKey) {
+            $translate.use(langKey);
+            vm.lang = $translate.use();
+            tmhDynamicLocale.set(langKey);
+        };
+
+        // ===================== Global authentication info ===============================
         $scope.authenticatedAccount = null;
-        vm.isAuthenticated = null;
+        $scope.isAuthenticated = null;
 
         $scope.$on('authenticationSuccess', function () {
             getAccount();
         });
 
         $scope.$on('logoutSuccess', function () {
-            getAccount();
+            $scope.authenticatedAccount = null;
+            $scope.isAuthenticated = false;
         });
 
-        // when page loading cheking user authentication
+        // when page loading checking user authentication
         Auth.isAuthenticated().then(function (authName) {
             if (authName.length > 0) {
                 // if user authenticated then we getting user info
                 getAccount();
             } else {
-                vm.isAuthenticated = false;
+                $scope.isAuthenticated = false;
             }
         });
 
         function getAccount() {
             Auth.getCurrentUserInfo().then(function (account) {
+                if (account !== null) {
+                    $scope.isAuthenticated = true;
+                } else {
+                    $scope.isAuthenticated = false;
+                }
                 $scope.authenticatedAccount = account;
-                vm.isAuthenticated = true;
             }).catch(function () {
-                vm.isAuthenticated = false;
+                $scope.authenticatedAccount = null;
+                $scope.isAuthenticated = false;
             });
         }
-
-        vm.changeLanguage = function (langKey) {
-            $translate.use(langKey);
-            vm.lang = $translate.use();
-            tmhDynamicLocale.set(langKey);
-        };
+        // ==================================================================================
+        
     }
 
     function runFunc($rootScope, $translate) {
