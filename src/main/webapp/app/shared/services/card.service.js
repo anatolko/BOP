@@ -1,4 +1,5 @@
 /*global angular*/
+
 (function () {
     'use strict';
     var API_URL = 'api/cards';
@@ -89,7 +90,12 @@
 
         /**
          * returns all BOP cards for user
+         *
          * @param id user id
+         * @param size - size of page
+         * @param page - number of page
+         * @param sort - type of sorting
+         *
          * @returns promise with request
          */
         function getAllCardsByUserId(id, size, page, sort) {

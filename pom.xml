@@ -90,6 +90,12 @@
             <version>20141113</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>4.0</version>
+        </dependency>
+
     </dependencies>
 
 
@@ -99,6 +105,19 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>4.0</version>
+                <configuration>
+                    <user>postgres</user>
+                    <password>postgres</password>
+                    <url>jdbc:postgresql://localhost:5432/RULIPBOP</url>
+                    <schemas>
+                        <schema>public</schema>
+                    </schemas>
+                </configuration>
             </plugin>
             <!--<plugin>-->
                 <!--<groupId>com.github.eirslett</groupId>-->

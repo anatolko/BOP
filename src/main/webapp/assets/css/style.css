@@ -44,5 +44,31 @@ body {
 .size-error{
     color: red;
 }
+.cards-table>thead>tr>th {
+    text-align: center;
+}
+.cards-table>tbody>tr>td.cards-table__card-date {
+    width: 10%;
+}
+.cards-table>tbody>tr>td.cards-table__obs-date {
+    width: 10%;
+}
+.cards-table>tbody>tr>td.cards-table__obs-department {
+    width: 15%;
+}
+.cards-table>tbody>tr>td.cards-table__obs-categories {
+    width: 20%;
+}
+.cards-table>tbody>tr>td.cards-table__obs-fields {
+    width: 15%;
+}
+.cards-table>tbody>tr>td.cards-table__comment {
+    word-break: break-all;
+    width: 25%;
+}
+.cards-table>tbody>tr>td.cards-table__utils {
+    vertical-align: middle;
+    width: 5%;
+}
 
 
