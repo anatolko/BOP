@@ -26,8 +26,8 @@ SET default_with_oids = false;
 
 CREATE TABLE cards (
     id integer NOT NULL,
-    card_date timestamp(6) without time zone NOT NULL,
-    obs_date timestamp(6) without time zone NOT NULL,
+    card_date timestamp(6) with time zone NOT NULL,
+    obs_date timestamp(6) with time zone NOT NULL,
     obs_department_id integer NOT NULL,
     plant_id integer NOT NULL,
     selected_fields json,
