@@ -51,6 +51,7 @@ public class AccountResource {
                     resource.add(entityLinks.linkFor(User.class).slash(user.getId()).slash("plant").withRel("plant"));
                     resource.add(entityLinks.linkFor(User.class).slash(user.getId()).slash("userGroup").withRel("userGroup"));
                     resource.add(entityLinks.linkFor(User.class).slash(user.getId()).slash("userDepartment").withRel("userDepartment"));
+                    resource.add(entityLinks.linkFor(User.class).slash(user.getId()).slash("userRole").withRel("userRole"));
                     return new ResponseEntity<>(resource, HttpStatus.OK);
                 } )
                 .orElse(new ResponseEntity<Resource<User>>(HttpStatus.UNAUTHORIZED));

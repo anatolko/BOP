@@ -37,7 +37,7 @@
 
         function logout() {
             Auth.logout().then(function () {
-                $location.url('/login');
+                window.location = '/login';
                 $rootScope.$broadcast('logoutSuccess');
             });
         }

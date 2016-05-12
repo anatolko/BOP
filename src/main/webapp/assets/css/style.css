@@ -13,7 +13,7 @@ body {
     margin-bottom: 0px;
 }
 
-.navbar-inverse{
+.navbar-inverse {
     background-color: #00b3ee;
 }
 
@@ -71,4 +71,12 @@ body {
     width: 5%;
 }
 
+.cards-table__utils i {
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.cards-table__utils i:last-child {
+    margin-right: 0px;
+}
 

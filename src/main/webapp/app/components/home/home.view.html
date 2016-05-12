@@ -70,8 +70,15 @@
                     </td>
                     <td class="cards-table__comment">{{card.comment}}</td>
                     <td  class="cards-table__utils">
-                        <i class="fa fa-lg fa-pencil" aria-hidden="true"></i>
-                        <i class="fa fa-lg fa-trash-o" aria-hidden="true"></i>
+                        <i ng-hide="!home.canChangeCard(card.cardDate)"
+                           ng-attr-title="{{'home.table.edit' | translate}}"
+                           class="fa fa-lg fa-pencil"
+                           aria-hidden="true"></i>
+                        <i ng-hide="!home.canChangeCard(card.cardDate)" 
+                           ng-click="home.deleteCard(card.id)"
+                           ng-attr-title="{{'home.table.delete' | translate}}"
+                           class="fa fa-lg fa-trash-o"
+                           aria-hidden="true"></i>
                     </td>
                 </tr>
                 </tbody>

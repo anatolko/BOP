@@ -88,6 +88,27 @@
             return resultArr;
         };
 
+        /**
+         * delete BOP Card by id
+         * @param id of BOP Card
+         */
+        vm.deleteCard = function (id) {
+            if (typeof id !== 'undefined') {
+                Card.deleteCard(id).then(function () {
+                    $timeout(function () {
+                        getAllCardsForCurrentUser();
+                        getUserCardsForWeek();
+                    });
+                });
+            }
+        }
+
+        vm.canChangeCard = function (cardDate) {
+            var mondayDate = DateUtil.getStartOfDate(DateUtil.getMondayDate(new Date()));
+            return (new Date(cardDate)).getTime() >= mondayDate.getTime() ||
+                $scope.authenticatedAccount.userRole.name === 'ROLE_ADMIN';
+        }
+
         /*ui.bootstrap.modal*/
         /**
          * function opening modal window to create new BOP card

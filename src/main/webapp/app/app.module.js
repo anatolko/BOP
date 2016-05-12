@@ -56,11 +56,7 @@
 
         function getAccount() {
             Auth.getCurrentUserInfo().then(function (account) {
-                if (account !== null) {
-                    $scope.isAuthenticated = true;
-                } else {
-                    $scope.isAuthenticated = false;
-                }
+                $scope.isAuthenticated = (account !== null);
                 $scope.authenticatedAccount = account;
             }).catch(function () {
                 $scope.authenticatedAccount = null;
@@ -68,7 +64,6 @@
             });
         }
         // ==================================================================================
-        
     }
 
     function runFunc($rootScope, $translate) {

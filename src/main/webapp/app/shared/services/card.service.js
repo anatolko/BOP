@@ -16,6 +16,7 @@
         // public API
         return ({
             addCard: addCard,
+            deleteCard: deleteCard,
             getCard: getCard,
             getAllCards: getAllCards,
             getAllCardsByUserId: getAllCardsByUserId,
@@ -48,6 +49,15 @@
                     comment: comment,
                     userGroup: userGroup
                 }
+            });
+
+            return (request.then(handleSuccess, handleError));
+        }
+
+        function deleteCard(id) {
+            var request = $http({
+                method: 'delete',
+                url: API_URL + '/' + id
             });
 
             return (request.then(handleSuccess, handleError));
